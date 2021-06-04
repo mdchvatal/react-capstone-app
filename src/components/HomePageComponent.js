@@ -12,7 +12,26 @@ class HomePage extends Component {
     handleLogin(values) {
         this.toggleModal();
         alert("Username: " + this.username.value + " Password: " + this.password.value + " Remember: " + this.remember.checked);
-        values.preventDefault();
+        //values.preventDefault();
+
+        const [token, setToken] = useState(null);
+        const fetchToken = async () => {
+            process.env.REACT_APP_API_ENDPOINT = 'http://localhost:3000/Authenticate'
+            console.log(process.env.REACT_APP_API_ENDPOINT);
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: this.username.value,
+                    password: this.password.value
+                })
+            };
+            const response = await fetch(process.env.REACT_APP_API_ENDPOINT, requestOptions);
+            const data = await response.json();
+            console.log(data);
+            
+            setToken(data.token);              
+        };
     }
 
     render () {
@@ -28,11 +47,11 @@ class HomePage extends Component {
                                 <Form model="login" onSubmit={(values) => this.handleLogin(values)}>
                                     <FormGroup>
                                         <Label htmlFor="username">Username</Label>
-                                        <Control.text model=".username" id="username" name="username" placeholder="Username" className="form-control" validators={}/>
+                                        <Control.text model=".username" id="username" name="username" placeholder="Username" className="form-control"/>
                                     </FormGroup>
                                     <FormGroup>
                                         <Label htmlFor="password">Password</Label>
-                                        <Control.text model=".password" id="password" name="password" placeholder="Password" className="form-control" validators={}/>
+                                        <Control.text model=".password" id="password" name="password" placeholder="Password" className="form-control"/>
                                     </FormGroup>
                                     <Button>Log In</Button>
                                 </Form>
@@ -41,10 +60,8 @@ class HomePage extends Component {
                     </div>
                 </Jumbotron>
             </>
-        )
+        );
     }
 }
 
 export default HomePage;
-
-    
