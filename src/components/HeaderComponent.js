@@ -16,8 +16,10 @@ class Header extends Component {
     }
 
     render() {
+        // Ensured state exists. Remove when component is wired up.
+        this.state = this.state || {};
         return(
-            <>
+            <React.Fragment>
                 <Navbar style={{backgroundColor: '#f1f1f1'}} expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav}/>
@@ -50,14 +52,14 @@ class Header extends Component {
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
                                 <NavItem>
-                                    <NavLink href="/cd-accounts">CD</NavLink>
+                                    <NavLink className="nav-link" to="/cd-accounts">CD</NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
                     </div>
                 </Navbar>
-            </>
-        )
+            </React.Fragment>
+        );
     }
 }
 
