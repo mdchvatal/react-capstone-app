@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Modal, Button, ModalHeader, ModalBody, FormGroup,  
     Label, Input, Form, Row, Col} from 'reactstrap';
 
-class HomePage extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
         this.handleLogin = this.handleLogin.bind(this);
@@ -64,4 +64,4 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+export default Home;
