@@ -13,7 +13,7 @@ class App extends Component{
         <Provider store={store}>
           <MemoryRouter>
             <div>   
-              <MainComponent/>
+              <Main />
             </div>
           </MemoryRouter>
         </Provider>
