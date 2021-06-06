@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,} from 'reactstrap';
-import {NavLink} from 'react-router-dom';
-import {Link} from 'react-router';
+import { Link, NavLink } from 'react-router-dom';
 
 class Header extends Component {
     super(props) {
