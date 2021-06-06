@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {actions} from 'react-redux-form';
+import { loginUser } from '../redux/ActionCreators';
+
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 
-import { loginUser } from '../redux/ActionCreators'
+import { actions } from 'react-redux-form';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const mapStateToProps = (state) => {
 	return {
-		login: state.login,
+		token: state.token,
 	}
 }
 
@@ -21,19 +23,39 @@ const mapDispatchToProps = (dispatch) => ({
 class Main extends Component {
     constructor(props) {
         super(props);
+    
+        console.log('Main Component properties: ');
+        console.log(this.props);
+    }
+
+    componentDidMount() {
+        // Load any data here.
     }
 
     render() {
+        const HomePage = () => {
+            console.log('Home Page properties: ');
+            console.log(this.props);
+
+            return (
+                <Home loginUser={this.props.loginUser} />
+            );
+        };
+
         return (
             <div>
-                <Header/>
-                    <Switch location={this.props.location}>
-                        <Route path='/home' component={() => <Home loginUser={this.props.loginUser} />}/>
-                        <Redirect to="/home" />
-                    </Switch>
-                <Footer/>
+                <Header />
+                <TransitionGroup>
+                    <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
+                        <Switch location={this.props.location}>
+                            <Route path='/home' component={ HomePage } />
+                            <Redirect to="/home" />
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
+                <Footer />
             </div>
-            );
+        );
     }
 }
 
