@@ -1,15 +1,15 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
-export const authenticateUser = (username, password) => (dispatch) => {
-    const authenticateRequest = {
-        authenticateUser: username,
+export const loginUser = (username, password) => (dispatch) => {
+    const loginRequest = {
+        username: username,
         password: password
     };
     
-    return fetch(baseUrl + 'Authenticate', {
+    return fetch(baseUrl + 'authenticate', {
         method: "POST",
-        body: JSON.stringify(authenticateRequest),
+        body: JSON.stringify(loginRequest),
         headers: {
           "Content-Type": "application/json"
         },
@@ -19,7 +19,7 @@ export const authenticateUser = (username, password) => (dispatch) => {
         if (response.ok) {
             return response;
         } else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            let error = new Error(`Error {response.status}: {response.statusText}`);
             error.response = response;
             throw error;
         }
@@ -28,16 +28,20 @@ export const authenticateUser = (username, password) => (dispatch) => {
             throw error;
       })
     .then(response => response.json())
-    .then(response => dispatch(authenticationSucceeded(response)))
-    .catch(error =>  { console.log('user authentication', error.message); alert('Authentication failed\nError: '+error.message); });
+    .then(response => dispatch(loginSucceeded(response)))
+    .catch(error => dispatch(loginFailed(error.message)));
 };
 
-export const authenticationFailed = (errorMessage) => ({
-    type: ActionTypes.USER_AUTHENTICATION_FAILED,
+export const loginSucceeded = (jwt) => ({
+    type: ActionTypes.USER_LOGIN_SUCCEEDED,
+    payload: jwt
+});
+
+export const loginFailed = (errorMessage) => ({
+    type: ActionTypes.USER_LOGIN_FAILED,
     payload: errorMessage
 });
 
-export const authenticationSucceeded = (jwt) => ({
-    type: ActionTypes.USER_AUTHENTICATION_SUCCEEDED,
-    payload: jwt
+export const logout = () => ({
+    type: ActionTypes.USER_LOGOUT
 });
