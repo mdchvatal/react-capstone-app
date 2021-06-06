@@ -8,17 +8,17 @@ import { ConfigureStore } from './redux/configureStore';
 const store = ConfigureStore();
 
 class App extends Component{
-  render() {
-      return (
-        <Provider store={store}>
-          <MemoryRouter>
-            <div>   
-              <Main />
-            </div>
-          </MemoryRouter>
-        </Provider>
-    );
-  }
+	render() {
+		return (
+			<Provider store={store}>
+				<MemoryRouter>
+				<div>   
+					<Main />
+				</div>
+				</MemoryRouter>
+			</Provider>
+		);
+	}
 }
 
 export default App;
