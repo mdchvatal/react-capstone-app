@@ -5,8 +5,6 @@ import { Link, NavLink } from 'react-router-dom';
 import Login from './LoginComponent';
 
 function RenderLoginButton({isAuthenticated, toggleModal, logoutUser}) {
-    console.log('Logout User:');
-    console.log(logoutUser);
     if (isAuthenticated) {
         return (
             <Button outline onClick={() => logoutUser()}><span className="fa fa-sign-in fa-lg"></span>Sign Out</Button>
@@ -39,14 +37,18 @@ class Header extends Component {
     }
 
     toggleModal() {
+        if (!this.state.isModalOpen) {
+            this.props.resetLoginForm();
+            this.props.bankingSession.errorMessage = null;
+            this.props.bankingSession.isStarting = true;
+        }
+
         this.setState({
             isModalOpen: !this.state.isModalOpen
         });
     }
 
     render() {
-        console.log('Session Properties');
-        console.log(this.props.bankingSession.isAuthenticated);
         return(
             <React.Fragment>
                 <Navbar style={{backgroundColor: '#f1f1f1'}} expand="md">
@@ -91,10 +93,10 @@ class Header extends Component {
                         </Collapse>
                     </div>
                 </Navbar>
-                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                <Modal isOpen={this.state.isModalOpen && this.props.bankingSession.isStarting} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
                     <ModalBody>
-                        <Login loginUser={this.props.loginUser} resetLoginForm={this.props.resetLoginForm} />
+                        <Login loginUser={this.props.loginUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} />
                     </ModalBody>
                 </Modal>
             </React.Fragment>
