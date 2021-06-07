@@ -11,6 +11,9 @@ export const BankingSession = (state = {
         case ActionTypes.USER_LOGIN_FAILED:
             return {...state, isAuthenticated: false, token: null};
 
+        case ActionTypes.USER_LOGOUT:
+            return {...state, isAuthenticated: false, token: null};
+    
         default:
             return state;
     }
