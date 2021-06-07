@@ -14,7 +14,7 @@ class Home extends Component {
                                 <h1>LET'S ADD A PICTURE!</h1>
                             </div>
                             <div className="col-3">
-                                <Login loginUser={this.props.loginUser} />
+                                <Login loginUser={this.props.loginUser} resetLoginForm={this.props.resetLoginForm} />
                             </div>
                         </div>    
                     </div>
