@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Label, Col, Row } from 'reactstrap';
+import { Alert, Button, Label, Col, Row } from 'reactstrap';
 import { Control, Form, Errors } from 'react-redux-form';
 
 const required = (val) => val && val.length;
@@ -14,6 +14,7 @@ class Login extends Component {
     
     handleSubmit(values) {
         console.log("Submit values: " + values);
+        this.props.bankingSession.isStarting = true;
         this.props.loginUser(values.username, values.password);
         this.props.resetLoginForm();
     }
@@ -68,6 +69,7 @@ class Login extends Component {
                     </Row>
                     <Row className="form-group">
                         <Col md={{size:10, offset: 2}}>
+                            {this.props.bankingSession.errorMessage && <Alert color="danger">{this.props.bankingSession.errorMessage}</Alert>}
                             <Button type="submit" color="primary">
                                 Sign in
                             </Button>
