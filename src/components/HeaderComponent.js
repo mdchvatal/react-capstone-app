@@ -1,31 +1,59 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,} from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Link, NavLink } from 'react-router-dom';
 
+import Login from './LoginComponent';
+
+function RenderLoginButton({isAuthenticated, toggleModal, logoutUser}) {
+    console.log('Logout User:');
+    console.log(logoutUser);
+    if (isAuthenticated) {
+        return (
+            <Button outline onClick={() => logoutUser()}><span className="fa fa-sign-in fa-lg"></span>Sign Out</Button>
+        );
+    } else {
+        return (
+            <Button outline onClick={toggleModal}><span className="fa fa-sign-in fa-lg"></span>Sign In</Button>
+        );
+    }
+}
+
 class Header extends Component {
-    super(props) {
+    constructor(props) {
+        super(props);
+        console.log('Header Properties');
+        console.log(props);
         this.state = {
-            isNavOpen: false
+            isNavOpen: false,
+            isModalOpen: false
         };
 
         this.toggleNav = this.toggleNav.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
     toggleNav() {
-        this.setState({isNavOpen: !this.state.isNavOpen})
+        this.setState({
+            isNavOpen: !this.state.isNavOpen
+        });
+    }
+
+    toggleModal() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        });
     }
 
     render() {
-        // Ensured state exists. Remove when component is wired up.
-        this.state = this.state || {};
+        console.log('Session Properties');
+        console.log(this.props.bankingSession.isAuthenticated);
         return(
             <React.Fragment>
                 <Navbar style={{backgroundColor: '#f1f1f1'}} expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav}/>
                         <NavbarBrand className="mr-auto" href="/home">
-                            MeritBank //*placeholder*//
-                            /*<img  alt="nameLogo"/>*/
+                            MeritBank <img  alt="nameLogo"/>
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
@@ -55,9 +83,20 @@ class Header extends Component {
                                     <NavLink className="nav-link" to="/cd-accounts">CD</NavLink>
                                 </NavItem>
                             </Nav>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <RenderLoginButton isAuthenticated={this.props.bankingSession.isAuthenticated} toggleModal={this.toggleModal} logoutUser={this.props.logoutUser} />
+                                </NavItem>
+                            </Nav>
                         </Collapse>
                     </div>
                 </Navbar>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+                    <ModalBody>
+                        <Login loginUser={this.props.loginUser} resetLoginForm={this.props.resetLoginForm} />
+                    </ModalBody>
+                </Modal>
             </React.Fragment>
         );
     }
