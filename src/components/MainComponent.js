@@ -17,7 +17,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    loginUser: (username, password) => dispatch(loginUser(username, password))
+    loginUser: (username, password) => dispatch(loginUser(username, password)),
+    resetLoginForm: () => { dispatch(actions.reset('credentials'))}
 })
 
 class Main extends Component {
@@ -38,7 +39,7 @@ class Main extends Component {
             console.log(this.props);
 
             return (
-                <Home loginUser={this.props.loginUser} />
+                <Home loginUser={this.props.loginUser} resetLoginForm={this.props.resetLoginForm} />
             );
         };
 
