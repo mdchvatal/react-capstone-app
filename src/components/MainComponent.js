@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import { loginUser } from '../redux/ActionCreators';
+import { loginUser, logoutUser } from '../redux/ActionCreators';
 
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
@@ -12,12 +12,13 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const mapStateToProps = (state) => {
 	return {
-		token: state.token,
+		bankingSession: state.bankingSession,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
     loginUser: (username, password) => dispatch(loginUser(username, password)),
+    logoutUser: () => dispatch(logoutUser()),
     resetLoginForm: () => { dispatch(actions.reset('credentials'))}
 })
 
@@ -34,22 +35,13 @@ class Main extends Component {
     }
 
     render() {
-        const HomePage = () => {
-            console.log('Home Page properties: ');
-            console.log(this.props);
-
-            return (
-                <Home loginUser={this.props.loginUser} resetLoginForm={this.props.resetLoginForm} />
-            );
-        };
-
         return (
             <div>
-                <Header />
+                <Header loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} />
                 <TransitionGroup>
                     <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
                         <Switch location={this.props.location}>
-                            <Route path='/home' component={ HomePage } />
+                            <Route path='/home' component={Home} />
                             <Redirect to="/home" />
                         </Switch>
                     </CSSTransition>
