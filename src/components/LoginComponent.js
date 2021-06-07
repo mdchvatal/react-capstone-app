@@ -15,7 +15,9 @@ class Login extends Component {
     }   
     
     handleSubmit(values) {
+        console.log("Submit values: " + values);
         this.props.loginUser(values.username, values.password);
+        this.props.resetLoginForm();
     }
 
     render() {
@@ -36,7 +38,7 @@ class Login extends Component {
                         <h3>Welcome back</h3>
                     </div>
                     <div className="col-12 col-md-9">
-                          <Form model="loginUser" onSubmit={(values) => this.handleSubmit(values)}>
+                          <Form model="credentials" onSubmit={(values) => this.handleSubmit(values)}>
                           <Row className="form-group">
                                 <Label htmlFor="username" md={2}>First Name</Label>
                                 <Col md={10}>
