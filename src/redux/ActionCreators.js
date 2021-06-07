@@ -19,7 +19,12 @@ export const loginUser = (username, password) => (dispatch) => {
         if (response.ok) {
             return response;
         } else {
-            let error = new Error(`Error {response.status}: {response.statusText}`);
+            let error;
+            if (response.status === 403) {
+                error = new Error('Incorrect username or password');
+            } else {
+                error = new Error('Error ' + response.status + ': ' + response.statusText);
+            }
             error.response = response;
             throw error;
         }
