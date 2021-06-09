@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Button, Label, Col, Row } from 'reactstrap';
+import { Alert, Button, Input, Label, Col, Row } from 'reactstrap';
 import { Control, Form, Errors } from 'react-redux-form';
 
 const required = (val) => val && val.length;
@@ -48,7 +48,7 @@ class Login extends Component {
                     <Row className="form-group">
                         <Label htmlFor="password" md={2}>Last Name</Label>
                         <Col md={10}>
-                            <Control.text model=".password" id="password" name="password"
+                            <Control type="password" model=".password" id="password" name="password"
                                 placeholder="Password"
                                 className="form-control"
                                 validators={{
