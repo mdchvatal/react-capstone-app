@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Button, Label, Col, Row } from 'reactstrap';
+import { Alert, Button, Input, Label, Col, Row } from 'reactstrap';
 import { Control, Form, Errors } from 'react-redux-form';
 import { Link, NavLink, Redirect, withRouter} from 'react-router-dom';
 
@@ -62,7 +62,7 @@ class Login extends Component {
                         <Row className="form-group">
                             <Label htmlFor="password" className="col-form-label">Last Name</Label>
                             <Col md={10}>
-                                <Control.text model=".password" id="password" name="password"
+                                <Control type="password" model=".password" id="password" name="password"
                                     placeholder="Password"
                                     className="form-control"
                                     validators={{
