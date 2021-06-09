@@ -10,21 +10,19 @@ class Home extends Component {
 
     render () {
         return(
-            <React.Fragment>
-                <Jumbotron fluid>
-                    <div className="container">
-                        <div className="row justify-content-center">
-                            <div className="col-9">
-                                <h1>LET'S ADD A PICTURE!</h1>
-                            </div>
-                            
-                            <Card className="col-3" color='white'>
-                                <Login loginUser={this.props.loginUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} />
-                            </Card>
-                        </div>    
-                    </div>
-                </Jumbotron>
-            </React.Fragment>
+            <Jumbotron className=".container-fluid">
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-9">
+                            <h1>LET'S ADD A PICTURE!</h1>
+                        </div>
+                        
+                        <Card className="col-3" color='white'>
+                            <Login loginUser={this.props.loginUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} />
+                        </Card>
+                    </div>    
+                </div>
+            </Jumbotron>
         );
     }
 }

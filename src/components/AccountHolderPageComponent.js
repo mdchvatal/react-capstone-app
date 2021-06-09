@@ -14,6 +14,7 @@ function RenderAccounts({account}) {
         )
     }
 }
+
 const CheckingAccounts=(props) => {
     
     const accounts = props.accountHolder.checkingAccounts.map((account1)=>{
@@ -45,9 +46,6 @@ const CDAccounts=(props) => {
 class AccountHolderPage extends Component {
     constructor(props) {
         super(props);
-
-        //this.RenderAccounts = this.RenderAccounts.bind(this);
-
     }
 
     render() {
@@ -64,6 +62,6 @@ class AccountHolderPage extends Component {
             </>
         )
     }
-
 }
+
 export default AccountHolderPage;
