@@ -28,12 +28,9 @@ class Login extends Component {
         this.setState({submit: true});
     }
 
+    
+
     render() {
-        if (this.state.submit) {
-            return (
-                <Redirect to="/account-holder"/>
-            )
-        } else{
             return(
                 <React.Fragment>
                     <Form model="credentials" onSubmit={(values) => this.handleSubmit(values)}>
@@ -96,6 +93,6 @@ class Login extends Component {
 
     }
 
-}
+
 
 export default withRouter(Login);
