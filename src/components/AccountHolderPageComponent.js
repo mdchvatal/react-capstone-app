@@ -1,41 +1,65 @@
-import React, { Component } from 'react';
-import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { Component } from 'react';
+import Header from './HeaderComponent';
 import {Jumbotron, Card, CardBody, CardText, Container, CardTitle} from 'reactstrap';
-import {SavingsAccountDetails} from './AccountHolderDetailComponent';
 
+function RenderAccounts({account}) {
+    if (account!=null){
+        return(
+            <Container className= "themed-container" fluid={true}>
+                    <Card>
+                        <CardTitle>Account</CardTitle>
+                        <CardBody>{account.balance}</CardBody>
+                    </Card>
+            </Container>
+        )
+    }
+}
 
-
-
-
+const CheckingAccounts=(props) => {
+    
+    const accounts = props.accountHolder.checkingAccounts.map((account1)=>{
+        return(
+            <div key={account1.id}>
+                <RenderAccounts account={account1}/>
+            </div>
+        )
+    })
+}
+const SavingsAccounts=(props) => {
+    const accounts = props.accountHolder.savingsAccounts.map((account1)=>{
+        return(
+            <div key={account1.id}>
+                <RenderAccounts account={account1}/>
+            </div>
+        )
+    })
+}
+const CDAccounts=(props) => {
+    const accounts = props.accountHolder.cdAccounts.map((account1)=>{
+        return(
+            <div key={account1.id}>
+                <RenderAccounts account={account1}/>
+            </div>
+        )
+    })
+}
 class AccountHolderPage extends Component {
-    constructor(props) {    
+    constructor(props) {
         super(props);
     }
 
-  componentDidMount() {
-    this.props.fetchAccountHolderData(this.props.bankingSession.token.jwt);
-  }
-        
-        
-
-    render () {
-        return (
-            <div>
-                <Jumbotron className=".container-fluid">
-                    <div className="container">
-                        <div className="row justify-content-center">
-                            <div className="col-9">
-                                <h1>LET'S ADD A PICTURE!</h1>
-                            </div>
-                        </div>    
+    render() {
+        return(
+            <>
+                <Jumbotron>
+                    <div className="themed-container" fluid="md">
+                        STUFF HERE//add icon
                     </div>
                 </Jumbotron>
-                <Card className="accountCard">
-                    <SavingsAccountDetails accounts={this.props.accountHolderData.accountHolder.savingsAccounts}/>
-                </Card>
-            </div>
-
+                <div>{CDAccounts}</div>
+                <div>{CheckingAccounts}</div>
+                <div>{SavingsAccounts}</div>
+            </>
         )
     }
 }
