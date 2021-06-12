@@ -6,7 +6,7 @@ import { fetchAccountHolderData, loginUser, logoutUser } from '../redux/ActionCr
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
-import Admin from './AdminComponent';
+import AdminHome from './AdminHomeComponent';
 import AdminUsers from './AdminUsersComponent';
 import AdminCDOfferings from './AdminCDOfferingsComponent';
 import AdminAccountHolders from './AdminAccountHoldersComponent';
@@ -52,7 +52,7 @@ class Main extends Component {
                                 resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession}
                                 fetchAccountHolderData={this.props.fetchAccountHolderData}/>} />
                             <Route path='/account-holder' component={() => <AccountHolderPage accountHolderData={this.props.accountHolderData} fetchAccountHolderData={this.props.fetchAccountHolderData} bankingSession={this.props.bankingSession}/>}/>
-                            <Route path='/admin' component={Admin} />
+                            <Route path='/admin' component={AdminHome} />
                             <Route path='/users' component={AdminUsers} />
                             <Route path='/cdofferings' component={AdminCDOfferings} />
                             <Route path='/accountholders' component={AdminAccountHolders} />
