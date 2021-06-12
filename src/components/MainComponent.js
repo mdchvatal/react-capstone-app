@@ -7,6 +7,9 @@ import Home from './HomeComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Admin from './AdminComponent';
+import AdminUsers from './AdminUsersComponent';
+import AdminCDOfferings from './AdminCDOfferingsComponent';
+import AdminAccountHolders from './AdminAccountHoldersComponent';
 import AccountHolderPage from './AccountHolderPageComponent';
 
 import { actions } from 'react-redux-form';
@@ -50,6 +53,9 @@ class Main extends Component {
                                 fetchAccountHolderData={this.props.fetchAccountHolderData}/>} />
                             <Route path='/account-holder' component={() => <AccountHolderPage accountHolderData={this.props.accountHolderData} fetchAccountHolderData={this.props.fetchAccountHolderData} bankingSession={this.props.bankingSession}/>}/>
                             <Route path='/admin' component={Admin} />
+                            <Route path='/users' component={AdminUsers} />
+                            <Route path='/cdofferings' component={AdminCDOfferings} />
+                            <Route path='/accountholders' component={AdminAccountHolders} />
                             <Redirect to="/home" />
                         </Switch>
                     </CSSTransition>
