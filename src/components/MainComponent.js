@@ -6,6 +6,7 @@ import { loginUser, logoutUser } from '../redux/ActionCreators';
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
+import Admin from './AdminComponent';
 import AccountHolderPage from './AccountHolderPageComponent';
 
 import { actions } from 'react-redux-form';
@@ -43,7 +44,8 @@ class Main extends Component {
                     <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
                         <Switch location={this.props.location}>
                             <Route path='/home' component={() => <Home loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} />} />
-                            <Route path='/account-holder' component={AccountHolderPage}/>
+                            <Route path='/account-holder' component={AccountHolderPage} />
+                            <Route path='/admin' component={Admin} />
                             <Redirect to="/home" />
                         </Switch>
                     </CSSTransition>
