@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => ({
     loginUser: (username, password) => dispatch(loginUser(username, password)),
     logoutUser: () => dispatch(logoutUser()),
     resetLoginForm: () => { dispatch(actions.reset('credentials'))},
-    fetchAccountHolderData: (jwt) => dispatch(fetchAccountHolderData(jwt))
+    fetchAccountHolderData: (data) => dispatch(fetchAccountHolderData(data))
 })
 
 class Main extends Component {
