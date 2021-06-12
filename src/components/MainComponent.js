@@ -49,6 +49,7 @@ class Main extends Component {
                                 resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession}
                                 fetchAccountHolderData={this.props.fetchAccountHolderData}/>} />
                             <Route path='/account-holder' component={() => <AccountHolderPage accountHolderData={this.props.accountHolderData} fetchAccountHolderData={this.props.fetchAccountHolderData} bankingSession={this.props.bankingSession}/>}/>
+                            <Route path='/admin' component={Admin} />
                             <Redirect to="/home" />
                         </Switch>
                     </CSSTransition>
