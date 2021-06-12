@@ -31,7 +31,7 @@ class Login extends Component {
     render() {
         if (this.state.submit) {
             return (
-                <Redirect to="/account-holder"/>
+                <Redirect to="/admin"/>
             )
         } else{
             return(
