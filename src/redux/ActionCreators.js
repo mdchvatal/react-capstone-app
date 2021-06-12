@@ -4,17 +4,20 @@ import { baseUrl } from '../shared/baseUrl';
 export const loginUser = (username, password) => (dispatch) => {
     const loginRequest = {
         username: username,
-        password: password
+        password: password,
+        role: 'ROLE_USER'
     };
     
     return fetch(baseUrl + 'authenticate', {
         method: "POST",
         body: JSON.stringify(loginRequest),
         headers: {
-          "Content-Type": "application/json"
+            "Content-Type": "application/json"
         },
-        credentials: "same-origin"
+    
+       credentials: 'same-origin'
     })
+
     .then(response => {
         if (response.ok) {
             return response;

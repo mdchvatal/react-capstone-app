@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import { loginUser, logoutUser } from '../redux/ActionCreators';
+import { fetchAccountHolderData, loginUser, logoutUser } from '../redux/ActionCreators';
 
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
@@ -15,13 +15,15 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 const mapStateToProps = (state) => {
 	return {
 		bankingSession: state.bankingSession,
+        accountHolderData: state.accountHolderData
 	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
     loginUser: (username, password) => dispatch(loginUser(username, password)),
     logoutUser: () => dispatch(logoutUser()),
-    resetLoginForm: () => { dispatch(actions.reset('credentials'))}
+    resetLoginForm: () => { dispatch(actions.reset('credentials'))},
+    fetchAccountHolderData: (jwt) => dispatch(fetchAccountHolderData(jwt))
 })
 
 class Main extends Component {
@@ -43,9 +45,10 @@ class Main extends Component {
                 <TransitionGroup>
                     <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
                         <Switch location={this.props.location}>
-                            <Route path='/home' component={() => <Home loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} />} />
-                            <Route path='/account-holder' component={AccountHolderPage} />
-                            <Route path='/admin' component={Admin} />
+                            <Route path='/home' component={() => <Home loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} 
+                                resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession}
+                                fetchAccountHolderData={this.props.fetchAccountHolderData}/>} />
+                            <Route path='/account-holder' component={() => <AccountHolderPage accountHolderData={this.props.accountHolderData} fetchAccountHolderData={this.props.fetchAccountHolderData} bankingSession={this.props.bankingSession}/>}/>
                             <Redirect to="/home" />
                         </Switch>
                     </CSSTransition>
