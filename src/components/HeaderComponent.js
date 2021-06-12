@@ -82,8 +82,8 @@ class Header extends Component {
                         <Navbar expand="md">
                             <div className="container centering">
                                 <NavbarToggler onClick={this.toggleNav}/>
-                                <NavbarBrand className="mr-auto" href="/home">
-                                    MeritBank <img  alt="nameLogo"/>
+                                <NavbarBrand className="mr-auto" href="/home"> 
+                                    <img alt="nameLogo" src="assets/images/logo.png" alt="Merit Bank" />
                                 </NavbarBrand>
                                 <Collapse isOpen={this.state.isNavOpen} navbar>
                                     <Nav navbar>
@@ -119,8 +119,8 @@ class Header extends Component {
                         <Navbar expand="md">
                             <div className="container centering">
                                 <NavbarToggler onClick={this.toggleNav}/>
-                                <NavbarBrand className="mr-auto" href="/home">
-                                    MeritBank <img  alt="nameLogo"/>
+                                <NavbarBrand className="mr-auto" href="/home"> 
+                                    <img alt="nameLogo" src="assets/images/logo.png" alt="Merit Bank" />
                                 </NavbarBrand>
                                 <Collapse isOpen={this.state.isNavOpen} navbar>
                                     <Nav navbar>
