@@ -1,6 +1,15 @@
 import { Component } from 'react';
 import Header from './HeaderComponent';
 import {Jumbotron, Card, CardBody, CardText, Container, CardTitle} from 'reactstrap';
+import {SavingsAccountDetails} from './AccountHolderDetailComponent';
+
+const mapStateToProps = (state) => {
+	return {
+		bankingSession: state.bankingSession,
+        accountHolderData: state.accountHolderData
+	}
+}
+
 
 function RenderAccounts({account}) {
     if (account!=null){
@@ -48,12 +57,24 @@ class AccountHolderPage extends Component {
         super(props);
     }
 
-    render() {
-        return(
-            <>
-                <Jumbotron>
-                    <div className="themed-container" fluid="md">
-                        STUFF HERE//add icon
+  componentWillMount() {
+    const jwt = this.props.bankingSession.token.jwt;
+    this.props.fetchAccountHolderData(jwt);
+  }
+        
+        
+
+    render () {
+        
+        return (
+            <div>
+                <Jumbotron className=".container-fluid">
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <div className="col-9">
+                                <h1>LET'S ADD A PICTURE!</h1>
+                            </div>
+                        </div>    
                     </div>
                 </Jumbotron>
                 <div>{CDAccounts}</div>
@@ -64,4 +85,4 @@ class AccountHolderPage extends Component {
     }
 }
 
-export default AccountHolderPage;
+export default connect(mapStateToProps)(AccountHolderPage);
