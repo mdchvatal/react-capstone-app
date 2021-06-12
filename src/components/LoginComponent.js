@@ -16,7 +16,6 @@ class Login extends Component {
             submit: false
         }
 
-        
         this.handleSubmit = this.handleSubmit.bind(this);
     }   
     
@@ -28,8 +27,6 @@ class Login extends Component {
         this.setState({submit: true});
         
     }
-
-    
 
     render() {
         if (this.state.submit) {
@@ -96,9 +93,7 @@ class Login extends Component {
                 </React.Fragment>
             );
         }
-
     }
-
-
+}
 
 export default withRouter(Login);
