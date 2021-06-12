@@ -4,7 +4,12 @@ import {connect} from 'react-redux';
 import {Jumbotron, Card, CardBody, CardText, Container, CardTitle} from 'reactstrap';
 import {SavingsAccountDetails} from './AccountHolderDetailComponent';
 
-
+const mapStateToProps = (state) => {
+	return {
+		bankingSession: state.bankingSession,
+        accountHolderData: state.accountHolderData
+	}
+}
 
 
 
@@ -13,13 +18,15 @@ class AccountHolderPage extends Component {
         super(props);
     }
 
-  componentDidMount() {
-    this.props.fetchAccountHolderData(this.props.bankingSession.token.jwt);
+  componentWillMount() {
+    const jwt = this.props.bankingSession.token.jwt;
+    this.props.fetchAccountHolderData(jwt);
   }
         
         
 
     render () {
+        
         return (
             <div>
                 <Jumbotron className=".container-fluid">
@@ -40,4 +47,4 @@ class AccountHolderPage extends Component {
     }
 }
 
-export default AccountHolderPage;
+export default connect(mapStateToProps)(AccountHolderPage);

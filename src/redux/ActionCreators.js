@@ -56,7 +56,7 @@ export const logoutUser = () => ({
 
 export const fetchAccountHolderData = (jwt) => (dispatch) => {
     const headers = {
-        "Authentication": "Bearer " + jwt
+        "Authorization": `Bearer ${jwt}`,
     }
     console.log(jwt);
     console.log(headers)
@@ -64,7 +64,7 @@ export const fetchAccountHolderData = (jwt) => (dispatch) => {
     
     return fetch(baseUrl + 'me', {
         method: "GET",
-        headers: JSON.stringify(headers),  
+        headers: headers,  
         
     })
         .then(response => {
