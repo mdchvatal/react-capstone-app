@@ -37,9 +37,9 @@ export const loginUser = (username, password) => (dispatch) => {
     .catch(error => dispatch(loginFailed(error.message)));
 };
 
-export const loginSucceeded = (jwt) => ({
+export const loginSucceeded = (data) => ({
     type: ActionTypes.USER_LOGIN_SUCCEEDED,
-    payload: jwt
+    payload: data
 });
 
 export const loginFailed = (errorMessage) => ({
