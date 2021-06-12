@@ -4,20 +4,17 @@ import { baseUrl } from '../shared/baseUrl';
 export const loginUser = (username, password) => (dispatch) => {
     const loginRequest = {
         username: username,
-        password: password,
-        role: 'ROLE_USER'
+        password: password
     };
     
     return fetch(baseUrl + 'authenticate', {
         method: "POST",
         body: JSON.stringify(loginRequest),
         headers: {
-            "Content-Type": "application/json"
+          "Content-Type": "application/json"
         },
-    
-       credentials: 'same-origin'
+        credentials: "same-origin"
     })
-
     .then(response => {
         if (response.ok) {
             return response;
@@ -40,9 +37,9 @@ export const loginUser = (username, password) => (dispatch) => {
     .catch(error => dispatch(loginFailed(error.message)));
 };
 
-export const loginSucceeded = (jwt) => ({
+export const loginSucceeded = (data) => ({
     type: ActionTypes.USER_LOGIN_SUCCEEDED,
-    payload: jwt
+    payload: data
 });
 
 export const loginFailed = (errorMessage) => ({

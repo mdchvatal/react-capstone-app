@@ -29,11 +29,12 @@ class Login extends Component {
         
     }
 
-
-
-    
-
     render() {
+        if (this.state.submit) {
+            return (
+                <Redirect to="/admin"/>
+            )
+        } else{
             return(
                 <React.Fragment>
                     <Form model="credentials" onSubmit={(values) => this.handleSubmit(values)}>
@@ -96,6 +97,6 @@ class Login extends Component {
 
     }
 
-
+}
 
 export default withRouter(Login);

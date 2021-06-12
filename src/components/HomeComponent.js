@@ -8,10 +8,6 @@ class Home extends Component {
         super(props);
     }
 
-    componentWillUnmount() {
-       
-    }
-
     render () {
         return(
             <Jumbotron className=".container-fluid">
@@ -22,8 +18,7 @@ class Home extends Component {
                         </div>
                         
                         <Card className="col-3" color='white'>
-                            <Login loginUser={this.props.loginUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} 
-                                fetchAccountHolderData={this.props.fetchAccountHolderData}/>
+                            <Login loginUser={this.props.loginUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} />
                         </Card>
                     </div>    
                 </div>
