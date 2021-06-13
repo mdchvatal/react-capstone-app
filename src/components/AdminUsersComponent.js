@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, Table } from 'reactstrap';
-import { Control, Form, Errors } from 'react-redux-form';
-import { Link, NavLink, Redirect, withRouter} from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 
 import { Loading } from './LoadingComponent';
