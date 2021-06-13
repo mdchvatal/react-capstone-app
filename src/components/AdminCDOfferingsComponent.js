@@ -21,6 +21,9 @@ class AdminCDOfferings extends Component {
     }
 
     componentDidMount() {
+        console.log('CD Offerings Props:');
+        console.log(this.props);
+
         if (this.props.status === 'idle') {
             this.props.fetchCDOfferings(this.props.bankingSession);
         }
@@ -60,8 +63,8 @@ class AdminCDOfferings extends Component {
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
-                                                    <th>Username</th>
-                                                    <th>Role</th>
+                                                    <th>Term</th>
+                                                    <th>Interest Rate</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
