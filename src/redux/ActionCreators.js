@@ -54,6 +54,54 @@ export const logoutUser = () => ({
     type: ActionTypes.USER_LOGOUT
 });
 
+export const fetchUsers = (bankingSession) => (dispatch) => {
+    dispatch(usersLoading);
+    console.log('Banking Session:');
+    console.log(bankingSession);
+
+    if (bankingSession && bankingSession.token) {
+        return fetch(baseUrl + 'users', {
+            authorization: `Bearer ${bankingSession.token}`,
+            headers: {
+                "Content-Type": "application/json"
+            },
+        
+        credentials: 'same-origin'
+        })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                let error = new Error('Error ' + response.status + '. Unable to get users.')
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+                throw error;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(usersSucceeded(response)))
+        .catch(error => dispatch(usersFailed(error.message)));
+    } else {
+        usersFailed('Please sign in first.');
+    }
+};
+
+export const usersLoading = () => ({
+    type: ActionTypes.USERS_LOADING
+});
+
+export const usersSucceeded = (data) => ({
+    type: ActionTypes.USERS_GET_SUCCEEDED,
+    payload: data
+});
+
+export const usersFailed = (errorMessage) => ({
+    type: ActionTypes.USERS_GET_FAILED,
+    payload: errorMessage
+});
+
 export const fetchAccountHolderData = (jwt) => (dispatch) => {
     const headers = {
         "Authorization": `Bearer ${jwt}`,
