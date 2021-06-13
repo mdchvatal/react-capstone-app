@@ -60,13 +60,13 @@ export const fetchUsers = (bankingSession) => (dispatch) => {
     console.log(bankingSession);
 
     if (bankingSession && bankingSession.token) {
+        console.log('Loading Users...');    
         return fetch(baseUrl + 'users', {
-            authorization: `Bearer ${bankingSession.token}`,
             headers: {
+                "Authorization": `Bearer ${bankingSession.token}`,
                 "Content-Type": "application/json"
             },
-        
-        credentials: 'same-origin'
+            credentials: 'same-origin'
         })
         .then(response => {
             if (response.ok) {
