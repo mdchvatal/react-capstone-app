@@ -10,8 +10,12 @@ class Admin extends Component {
     
     render() {        
         return(
-            <div>
-                Here!
+            <div className="container">
+                <div className="row align-items-start">
+                    Admin Home
+                    <div className="col-12 col-md m-1">
+                    </div>
+                </div>
             </div>
         );
     }
