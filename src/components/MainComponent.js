@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import { loginUser, logoutUser, fetchUsers, fetchAccountHolderData } from '../redux/ActionCreators';
+import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolderData } from '../redux/ActionCreators';
 
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
@@ -19,6 +19,7 @@ const mapStateToProps = (state) => {
 	return {
 		bankingSession: state.bankingSession,
         users: state.users,
+        cdOfferings: state.cdOfferings,
         accountHolderData: state.accountHolderData
 	}
 }
@@ -28,6 +29,7 @@ const mapDispatchToProps = (dispatch) => ({
     logoutUser: () => dispatch(logoutUser()),
     resetLoginForm: () => { dispatch(actions.reset('credentials'))},
     fetchUsers: (bankingSession) => dispatch(fetchUsers(bankingSession)),
+    fetchCDOfferings: (bankingSession) => dispatch(fetchCDOfferings(bankingSession)),
     fetchAccountHolderData: (data) => dispatch(fetchAccountHolderData(data))
 })
 
@@ -46,15 +48,26 @@ class Main extends Component {
     render() {
         const AdminUsersPage = () => {
             return (
-              <AdminUsers 
-                bankingSession={this.props.bankingSession}
-                fetchUsers={this.props.fetchUsers}
-                users={this.props.users.model}
-                status={this.props.users.status}
-                errorMessage={this.props.users.errorMessage}
-              />
+                <AdminUsers 
+                    bankingSession={this.props.bankingSession}
+                    fetchUsers={this.props.fetchUsers}
+                    users={this.props.users.model}
+                    status={this.props.users.status}
+                    errorMessage={this.props.users.errorMessage}
+                />
             );
-          }
+        }
+        const AdminCDOfferingsPage = () => {
+            return (
+                <AdminCDOfferings 
+                    bankingSession={this.props.bankingSession}
+                    fetchCDOfferings={this.props.fetchCDOfferings}
+                    cdOfferings={this.props.cdOfferings.model}
+                    status={this.props.cdOfferings.status}
+                    errorMessage={this.props.cdOfferings.errorMessage}
+                />
+            );
+        }
         return (
             <div>
                 <Header loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} />
@@ -67,7 +80,7 @@ class Main extends Component {
                             <Route path='/account-holder' component={() => <AccountHolderPage accountHolderData={this.props.accountHolderData} fetchAccountHolderData={this.props.fetchAccountHolderData} bankingSession={this.props.bankingSession}/>}/>
                             <Route path='/admin' component={AdminHome} />
                             <Route path='/users' component={AdminUsersPage} />
-                            <Route path='/cdofferings' component={AdminCDOfferings} />
+                            <Route path='/cdofferings' component={AdminCDOfferingsPage} />
                             <Route path='/accountholders' component={AdminAccountHolders} />
                             <Redirect to="/home" />
                         </Switch>
