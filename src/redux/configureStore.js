@@ -3,6 +3,7 @@ import { createForms } from 'react-redux-form';
 import { BankingSession } from './bankingSession';
 import { Users } from './users';
 import { CDOfferings } from './cdOfferings';
+import { AccountHolders } from './accountHolders';
 import { AccountHolderData } from './accountHolderDataReducer';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
@@ -15,7 +16,8 @@ export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
             users: Users,
-            cdOfferings: CDOfferings, 
+            cdOfferings: CDOfferings,
+            accountHolders: AccountHolders, 
             accountHolderData: AccountHolderData,
             bankingSession: BankingSession,
             ...createForms({
