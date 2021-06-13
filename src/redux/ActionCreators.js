@@ -102,6 +102,54 @@ export const usersFailed = (errorMessage) => ({
     payload: errorMessage
 });
 
+export const fetchCDOfferings = (bankingSession) => (dispatch) => {
+    dispatch(cdOfferingsLoading);
+    console.log('Banking Session:');
+    console.log(bankingSession);
+
+    if (bankingSession && bankingSession.token) {
+        console.log('Loading CDOfferings...');    
+        return fetch(baseUrl + 'cd-offerings', {
+            headers: {
+                "Authorization": `Bearer ${bankingSession.token}`,
+                "Content-Type": "application/json"
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                let error = new Error('Error ' + response.status + '. Unable to get CD Offerings.')
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+                throw error;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(cdOfferingsSucceeded(response)))
+        .catch(error => dispatch(cdOfferingsFailed(error.message)));
+    } else {
+        cdOfferingsFailed('Please sign in first.');
+    }
+};
+
+export const cdOfferingsLoading = () => ({
+    type: ActionTypes.CDOFFERINGS_LOADING
+});
+
+export const cdOfferingsSucceeded = (data) => ({
+    type: ActionTypes.CDOFFERINGS_GET_SUCCEEDED,
+    payload: data
+});
+
+export const cdOfferingsFailed = (errorMessage) => ({
+    type: ActionTypes.CDOFFERINGS_GET_FAILED,
+    payload: errorMessage
+});
+
 export const fetchAccountHolderData = (jwt) => (dispatch) => {
     const headers = {
         "Authorization": `Bearer ${jwt}`,
