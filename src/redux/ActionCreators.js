@@ -56,8 +56,6 @@ export const logoutUser = () => ({
 
 export const fetchUsers = (bankingSession) => (dispatch) => {
     dispatch(usersLoading);
-    console.log('Banking Session:');
-    console.log(bankingSession);
 
     if (bankingSession && bankingSession.token) {
         console.log('Loading Users...');    
@@ -104,8 +102,6 @@ export const usersFailed = (errorMessage) => ({
 
 export const fetchCDOfferings = (bankingSession) => (dispatch) => {
     dispatch(cdOfferingsLoading);
-    console.log('Banking Session:');
-    console.log(bankingSession);
 
     if (bankingSession && bankingSession.token) {
         console.log('Loading CDOfferings...');    
@@ -147,6 +143,52 @@ export const cdOfferingsSucceeded = (data) => ({
 
 export const cdOfferingsFailed = (errorMessage) => ({
     type: ActionTypes.CDOFFERINGS_GET_FAILED,
+    payload: errorMessage
+});
+
+export const fetchAccountHolders = (bankingSession) => (dispatch) => {
+    dispatch(accountHoldersLoading);
+
+    if (bankingSession && bankingSession.token) {
+        console.log('Loading AccountHolders...');    
+        return fetch(baseUrl + 'account-holders', {
+            headers: {
+                "Authorization": `Bearer ${bankingSession.token}`,
+                "Content-Type": "application/json"
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                let error = new Error('Error ' + response.status + '. Unable to get CD Offerings.')
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+                throw error;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(accountHoldersSucceeded(response)))
+        .catch(error => dispatch(accountHoldersFailed(error.message)));
+    } else {
+        accountHoldersFailed('Please sign in first.');
+    }
+};
+
+export const accountHoldersLoading = () => ({
+    type: ActionTypes.ACCOUNTHOLDERS_LOADING
+});
+
+export const accountHoldersSucceeded = (data) => ({
+    type: ActionTypes.ACCOUNTHOLDERS_GET_SUCCEEDED,
+    payload: data
+});
+
+export const accountHoldersFailed = (errorMessage) => ({
+    type: ActionTypes.ACCOUNTHOLDERS_GET_FAILED,
     payload: errorMessage
 });
 

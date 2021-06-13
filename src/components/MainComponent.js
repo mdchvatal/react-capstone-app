@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolderData } from '../redux/ActionCreators';
+import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolders, fetchAccountHolderData } from '../redux/ActionCreators';
 
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
 		bankingSession: state.bankingSession,
         users: state.users,
         cdOfferings: state.cdOfferings,
+        accountHolders: state.accountHolders,
         accountHolderData: state.accountHolderData
 	}
 }
@@ -30,15 +31,13 @@ const mapDispatchToProps = (dispatch) => ({
     resetLoginForm: () => { dispatch(actions.reset('credentials'))},
     fetchUsers: (bankingSession) => dispatch(fetchUsers(bankingSession)),
     fetchCDOfferings: (bankingSession) => dispatch(fetchCDOfferings(bankingSession)),
+    fetchAccountHolders: (bankingSession) => dispatch(fetchAccountHolders(bankingSession)),
     fetchAccountHolderData: (data) => dispatch(fetchAccountHolderData(data))
 })
 
 class Main extends Component {
     constructor(props) {
         super(props);
-    
-        console.log('Main Component properties: ');
-        console.log(this.props);
     }
 
     componentDidMount() {
@@ -46,6 +45,9 @@ class Main extends Component {
     }
 
     render() {
+        console.log('Main Component Props on render:');
+        console.log(this.props);
+
         const AdminUsersPage = () => {
             return (
                 <AdminUsers 
@@ -68,6 +70,17 @@ class Main extends Component {
                 />
             );
         }
+        const AdminAccountHoldersPage = () => {
+            return (
+                <AdminAccountHolders 
+                    bankingSession={this.props.bankingSession}
+                    fetchAccountHolders={this.props.fetchAccountHolders}
+                    accountHolders={this.props.accountHolders.model}
+                    status={this.props.accountHolders.status}
+                    errorMessage={this.props.accountHolders.errorMessage}
+                />
+            );
+        }
         return (
             <div>
                 <Header loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} />
@@ -78,10 +91,10 @@ class Main extends Component {
                                 resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession}
                                 fetchAccountHolderData={this.props.fetchAccountHolderData}/>} />
                             <Route path='/account-holder' component={() => <AccountHolderPage accountHolderData={this.props.accountHolderData} fetchAccountHolderData={this.props.fetchAccountHolderData} bankingSession={this.props.bankingSession}/>}/>
-                            <Route path='/admin' component={AdminHome} />
-                            <Route path='/users' component={AdminUsersPage} />
-                            <Route path='/cdofferings' component={AdminCDOfferingsPage} />
-                            <Route path='/accountholders' component={AdminAccountHolders} />
+                            <Route exact path='/admin/' component={AdminHome} />
+                            <Route exact path='/admin/users' component={AdminUsersPage} />
+                            <Route exact path='/admin/cdOfferings' component={AdminCDOfferingsPage} />
+                            <Route exact path='/admin/accountHolders' component={AdminAccountHoldersPage} />
                             <Redirect to="/home" />
                         </Switch>
                     </CSSTransition>
