@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchUsers: (bankingSession) => dispatch(fetchUsers(bankingSession)),
     fetchCDOfferings: (bankingSession) => dispatch(fetchCDOfferings(bankingSession)),
     fetchAccountHolders: (bankingSession) => dispatch(fetchAccountHolders(bankingSession)),
-    fetchAccountHolderData: (data) => dispatch(fetchAccountHolderData(data))
+    fetchAccountHolderData: (jwt) => dispatch(fetchAccountHolderData(jwt))
 })
 
 class Main extends Component {
