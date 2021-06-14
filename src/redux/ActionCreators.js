@@ -193,12 +193,13 @@ export const accountHoldersFailed = (errorMessage) => ({
 });
 
 export const fetchAccountHolderData = (jwt) => (dispatch) => {
+    dispatch(accHolderLoading);
     const headers = {
         "Authorization": `Bearer ${jwt}`,
     }
     console.log(jwt);
     console.log(headers)
-    dispatch(accHolderLoading);
+    
     
     return fetch(baseUrl + 'me', {
         method: "GET",

@@ -1,4 +1,4 @@
-//this should have the login form in a container - see wireframes
+
 import React, { Component } from 'react';
 import { Jumbotron, Card, CardBody, CardText, Container, CardTitle} from 'reactstrap';
 import Login from './LoginComponent';

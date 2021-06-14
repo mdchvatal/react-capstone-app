@@ -10,7 +10,7 @@ import AdminHome from './AdminHomeComponent';
 import AdminUsers from './AdminUsersComponent';
 import AdminCDOfferings from './AdminCDOfferingsComponent';
 import AdminAccountHolders from './AdminAccountHoldersComponent';
-import AccountHolderPage from './AccountHolderPageComponent';
+//import AccountHolderPage from './AccountHolderPageComponent';
 
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -81,6 +81,17 @@ class Main extends Component {
                 />
             );
         }
+        const AccountHolderPage = () => {
+            return (
+                <AccountHolderPage
+                    status={this.props.accountHolderData.status}
+                    errorMessage={this.props.accountHolderData.errorMessage}
+                    accountHolderData={this.props.accountHolderData} 
+                    fetchAccountHolderData={this.props.fetchAccountHolderData} 
+                    bankingSession={this.props.bankingSession}
+                />
+            );
+        }
         return (
             <div>
                 <Header loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} />
@@ -90,8 +101,8 @@ class Main extends Component {
                             <Route path='/home' component={() => <Home loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} 
                                 resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession}
                                 fetchAccountHolderData={this.props.fetchAccountHolderData}/>} />
-                            <Route path='/account-holder' component={() => <AccountHolderPage accountHolderData={this.props.accountHolderData} fetchAccountHolderData={this.props.fetchAccountHolderData} bankingSession={this.props.bankingSession}/>}/>
-                            <Route exact path='/admin/' component={AdminHome} />
+                            <Route path='/account-holder' component={AccountHolderPage}/>
+                            <Route exact path='/admin' component={AdminHome} />
                             <Route exact path='/admin/users' component={AdminUsersPage} />
                             <Route exact path='/admin/cdOfferings' component={AdminCDOfferingsPage} />
                             <Route exact path='/admin/accountHolders' component={AdminAccountHoldersPage} />

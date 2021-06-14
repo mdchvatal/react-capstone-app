@@ -86,7 +86,6 @@ class AdminCDOfferings extends Component {
             }
         }
     }
-
 }
 
 export default withRouter(AdminCDOfferings);

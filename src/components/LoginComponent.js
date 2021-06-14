@@ -29,11 +29,15 @@ class Login extends Component {
     }
 
     render() {
-        if (this.state.submit) {
+        if (this.bankingSession != null && this.bankingSession.role === 'ADMIN') {
             return (
                 <Redirect to="/admin"/>
             )
-        } else{
+        } else if (this.bankingSession != null && this.bankingSession.role === 'USER') {
+            return (
+                <Redirect to="/account-holder"/>
+            )
+        }else {
             return(
                 <React.Fragment>
                     <Form model="credentials" onSubmit={(values) => this.handleSubmit(values)}>
