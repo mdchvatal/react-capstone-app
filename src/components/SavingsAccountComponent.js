@@ -15,17 +15,17 @@ function RenderAccount({account}) {
     );   
 } 
 
-class SavingsAccounts extends Component {
+class SavingsAccountPage extends Component {
 constructor(props) {    
     super(props); 
 }
 
 render() {
-    if (this.props.status === 'loading') {
+    if (this.props.accountHolderData.isLoading == true) {
         return(
             <div className="container">
                 <div className="row align-items-start">
-                    <h1>Users</h1>
+                    <h1></h1>
                     <Loading />
                 </div>
             </div>
@@ -35,7 +35,7 @@ render() {
             return(
                 <div className="container">
                     <div className="row align-items-start">
-                        <h1>Users</h1>
+                        <h1></h1>
                         <Alert color="danger">
                             {this.props.errorMessage}
                         </Alert>
@@ -46,7 +46,7 @@ render() {
             return(
                 <div className="container">
                     <div className="row align-items-start">
-                        <h1>Users</h1>
+                        <h1>{this.props.accountHolderData.accountHolder.firstName} {this.props.accountHolderData.accountHolder.lastName}</h1>
                         <div className="col-12 col-md m-1">
                             <Stagger in>
                                 <Fade in>
@@ -60,7 +60,7 @@ render() {
                                         </thead>
                                         <tbody>
                                             {
-                                                this.props.accounts.map((account) => {
+                                                this.props.accountHolderData.accountHolder.savingsAccounts.map((account) => {
                                                     return (
                                                         <RenderAccount account={account} />
                                                     );
@@ -79,5 +79,4 @@ render() {
 }
 }
 
-export default withRouter(SavingsAccounts);
-
+export default SavingsAccountPage;
