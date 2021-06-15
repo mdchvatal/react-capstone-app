@@ -6,6 +6,7 @@ import SavingsAccounts from './SavingsAccountComponent';
 import PersonalChecking from './PersonalCheckingComponent';
 import DBAChecking from './DBACheckingComponent';
 import {Loading} from './LoadingComponent'
+import MeritJumbotron from './MeritJumbtronComponent';
 
 
 function RenderAccount({account}) {
@@ -25,11 +26,13 @@ class AccountHolderPage extends Component {
         
 
     render () {
+        
         if (this.props.bankingSession.token != null) {
             ;
         }
         if (this.props.loading) {
             return(
+                
                 <div className="container">
                     <div className="row align-items-start">
                         <h1>Account Holders</h1>
@@ -40,6 +43,8 @@ class AccountHolderPage extends Component {
         } else {
             if (this.props.errorMessage) {
                 return(
+                <div>
+                    <MeritJumbotron/>
                     <div className="container">
                         <div className="row align-items-start">
                             <h1>Account Holders</h1>
@@ -48,16 +53,20 @@ class AccountHolderPage extends Component {
                             </Alert>
                         </div>
                     </div>
+                </div>    
                 );
             } else {
                 return(
-                <Card className="text-center">
-                    <h1>{this.props.accountHolderData.accountHolder.firstName} {this.props.accountHolderData.accountHolder.lastName}</h1>
-                    <h2>Combined Balance: {this.props.accountHolderData.accountHolder.combinedBalance}</h2>
-                    <SavingsAccounts accountHolderData={this.props.accountHolderData}/>
-                    <PersonalChecking accountHolderData={this.props.accountHolderData}/>
-                    <DBAChecking accountHolderData={this.props.accountHolderData}/>
-                </Card>
+                <div>
+                    <MeritJumbotron/>
+                    <Card className="text-center">
+                        <h1>{this.props.accountHolderData.accountHolder.firstName} {this.props.accountHolderData.accountHolder.lastName}</h1>
+                        <h2>Combined Balance: {this.props.accountHolderData.accountHolder.combinedBalance}</h2>
+                        <SavingsAccounts accountHolderData={this.props.accountHolderData}/>
+                        <PersonalChecking accountHolderData={this.props.accountHolderData}/>
+                        <DBAChecking accountHolderData={this.props.accountHolderData}/>
+                    </Card>
+                </div>
 
                 )
             }
