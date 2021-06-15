@@ -35,7 +35,8 @@
 .navbar-brand{
   background-color: white;
   color:black;
-  justify-content: right
+  justify-content: right;
+  
 }
 
 .dropdownMenu {

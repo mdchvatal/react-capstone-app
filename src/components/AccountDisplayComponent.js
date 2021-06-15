@@ -5,17 +5,18 @@ import { Fade, Stagger } from 'react-animation-components';
 
 import { Loading } from './LoadingComponent';
 
-function RenderAccount({account}) {
+function RenderTransaction({transaction}) {
     return (
             <tr>
-                <th scope="row">{account.id}</th>
-                <td>{account.balance}</td>
-                <td>{account.interestRate}</td>
+                <th scope="row">{transaction.id}</th>
+                <td>{transaction.origin}</td>
+                <td>{transaction.amount}</td>
+                <td>{transaction.transactionType}</td>
             </tr>
     );   
 } 
 
-class SavingsAccountPage extends Component {
+class AccountDisplay extends Component {
 constructor(props) {    
     super(props); 
 }
@@ -52,16 +53,17 @@ render() {
                                     <Table>
                                         <thead>
                                             <tr>
-                                                <th>Savings Account Number</th>
-                                                <th>Balance</th>
-                                                <th>Interest Rate</th>
+                                                <th>Transaction Number</th>
+                                                <th>Transaction Origin</th>
+                                                <th>Amount</th>
+                                                <th>Transaction Type</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
-                                                this.props.accountHolderData.accountHolder.savingsAccounts.map((account) => {
+                                                this.props.account.transactions.map((transaction) => {
                                                     return (
-                                                        <RenderAccount account={account} />
+                                                        <RenderTransaction transaction={transaction} />
                                                     );
                                                 })
                                             }
@@ -78,4 +80,4 @@ render() {
 }
 }
 
-export default SavingsAccountPage;
+export default AccountDisplay;

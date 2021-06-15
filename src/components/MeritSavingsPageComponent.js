@@ -1,4 +1,12 @@
-class AccountHolderPage extends Component {
+import React, { Component } from 'react';
+import { Alert, Table, Card, CardBody, CardText, Container, CardTitle, CardSubtitle} from 'reactstrap';
+import SavingsAccounts from './SavingsAccountComponent';
+import PersonalChecking from './PersonalCheckingComponent';
+import DBAChecking from './DBACheckingComponent';
+import {Loading} from './LoadingComponent'
+import AccountDisplay from './AccountDisplayComponent';
+
+class MeritSavingsPage extends Component {
     constructor(props) {    
         super(props);
     }
@@ -7,9 +15,6 @@ class AccountHolderPage extends Component {
         
 
     render () {
-        if (this.props.bankingSession.token != null) {
-            ;
-        }
         if (this.props.loading) {
             return(
                 <div className="container">
@@ -33,14 +38,20 @@ class AccountHolderPage extends Component {
                 );
             } else {
                 return(
-                <Card className="accountCard">
-                    <SavingsAccounts accountHolderData={this.props.accountHolderData}/>
+                <Card className="text-center">
+                    {
+                        this.props.accountHolderData.accountHolder.savingsAccounts.map((account) => {
+                            return (
+                                <AccountDisplay account={account}/>
+                            );
+                        })
+                    }
                 </Card>
 
                 )
             }
-                }
-            }
+        }
+    }
 }
 
-export default connect(mapStateToProps)(AccountHolderPage);
+export default MeritSavingsPage;

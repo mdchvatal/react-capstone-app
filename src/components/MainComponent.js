@@ -8,6 +8,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import AdminHome from './AdminHomeComponent';
 import AdminUsers from './AdminUsersComponent';
+import MeritSavingsPage from './MeritSavingsPageComponent';
 import AdminCDOfferings from './AdminCDOfferingsComponent';
 import AccountHolderPage from './AccountHolderPageComponent';
 import AdminAccountHolders from './AdminAccountHoldersComponent';
@@ -93,6 +94,12 @@ class Main extends Component {
                                 resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession}
                                 fetchAccountHolderData={this.props.fetchAccountHolderData}/>} />
                             <Route path='/account-holder' component={() =>  <AccountHolderPage
+                                                            status={this.props.accountHolderData.status}
+                                                            errorMessage={this.props.accountHolderData.errorMessage}
+                                                            accountHolderData={this.props.accountHolderData} 
+                                                            fetchAccountHolderData={this.props.fetchAccountHolderData} 
+                                                            bankingSession={this.props.bankingSession}/>}/>
+                            <Route path='/account-holder/merit-savings' component={() =>  <MeritSavingsPage
                                                             status={this.props.accountHolderData.status}
                                                             errorMessage={this.props.accountHolderData.errorMessage}
                                                             accountHolderData={this.props.accountHolderData} 
