@@ -1,5 +1,3 @@
-
-
 import React, { Component } from 'react';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -7,15 +5,6 @@ import { Alert, Table, Card, CardBody, CardText, Container, CardTitle} from 'rea
 import SavingsAccounts from './SavingsAccountComponent';
 import {Loading} from './LoadingComponent'
 
-const mapStateToProps = (state) => {
-	return {
-		bankingSession: state.bankingSession,
-        accountHolderData: state.accountHolderData
-	}
-}
-
-import { Loading } from './LoadingComponent';
-import SavingsAccounts from './SavingsAccountComponent';
 
 function RenderAccount({account}) {
         return (
@@ -31,12 +20,6 @@ class AccountHolderPage extends Component {
     constructor(props) {    
         super(props); 
     }
-
-  componentDidMount() {
-    
-    
-  }
-        
         
 
     render () {
@@ -76,4 +59,4 @@ class AccountHolderPage extends Component {
             }
 }
 
-export default withRouter(AccountHolderPage);
+export default AccountHolderPage;

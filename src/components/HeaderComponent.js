@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink,  } from 'react-router-dom';
 
 import Login from './LoginComponent';
 
@@ -58,8 +58,8 @@ class Header extends Component {
                             <NavbarBrand className="mr-auto" href="/home"> 
                                 <img alt="nameLogo" src="assets/images/logo.png" alt="Merit Bank" />
                             </NavbarBrand>
-                            <Collapse isOpen={this.state.isNavOpen} navbar>                            
-                                <Nav className="ml-auto" navbar>
+                            <Collapse isOpen={this.state.isNavOpen} className="ml-auto" navbar>                            
+                                <Nav className="mr-sm-2" navbar>
                                     <NavItem>
                                         <RenderLoginButton isAuthenticated={this.props.bankingSession.isAuthenticated} toggleModal={this.toggleModal} logoutUser={this.props.logoutUser} />
                                     </NavItem>
@@ -97,7 +97,7 @@ class Header extends Component {
                                             <NavLink className="nav-link" to="/admin/accountHolders">Account Holders</NavLink>
                                         </NavItem>
                                     </Nav>
-                                    <Nav className="ml-auto" navbar>
+                                    <Nav className="me-auto" navbar>
                                         <NavItem>
                                             <RenderLoginButton isAuthenticated={this.props.bankingSession.isAuthenticated} toggleModal={this.toggleModal} logoutUser={this.props.logoutUser} />
                                         </NavItem>
@@ -150,7 +150,7 @@ class Header extends Component {
                                             <NavLink className="nav-link" to="/cd-accounts">CD</NavLink>
                                         </NavItem>
                                     </Nav>
-                                    <Nav className="ml-auto" navbar>
+                                    <Nav className="d-flex flex-row-reverse bd-highlight" navbar>
                                         <NavItem>
                                             <RenderLoginButton isAuthenticated={this.props.bankingSession.isAuthenticated} toggleModal={this.toggleModal} logoutUser={this.props.logoutUser} />
                                         </NavItem>

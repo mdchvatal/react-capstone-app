@@ -8,17 +8,18 @@ class Home extends Component {
         super(props);
     }
 
-    componentWillUnmount() {
-       
-    }
-
     render () {
         return(
-            <Jumbotron className=".container-fluid">
+            <Jumbotron className=".container-fluid" style={{ backgroundImage:"linear-gradient(rgba(500,500,500,0.4), rgba(500,500,500,0.4)), url(assets/images/Dallas-Skyline-for-web.jpg)",
+                                                            backgroundPositionY: 'center',
+                                                            height: '100',
+                                                            width: '100',
+                                                            resizeMode: "contain",
+                                                            objectFit: 'none',
+                                                            opacity: '0.9'}}>
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-9">
-                            <h1>LET'S ADD A PICTURE!</h1>
                         </div>
                         
                         <Card className="col-3" color='white'>
