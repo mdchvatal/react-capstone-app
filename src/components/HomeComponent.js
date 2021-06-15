@@ -10,7 +10,7 @@ class Home extends Component {
 
     render () {
         return(
-            <Jumbotron className=".container-fluid" style={{ backgroundImage:"linear-gradient(rgba(500,500,500,0.4), rgba(500,500,500,0.4)), url(assets/images/Dallas-Skyline-for-web.jpg)",
+            <Jumbotron className=".container-fluid" style={{ backgroundImage:"linear-gradient(rgba(350,350,350,0.3), rgba(350,350,350,0.3)), url(assets/images/Dallas-Skyline-for-web.jpg)",
                                                             backgroundPositionY: 'center',
                                                             height: '100',
                                                             width: '100',

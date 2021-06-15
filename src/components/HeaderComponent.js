@@ -58,8 +58,8 @@ class Header extends Component {
                             <NavbarBrand className="mr-auto" href="/home"> 
                                 <img alt="nameLogo" src="assets/images/logo.png" alt="Merit Bank" />
                             </NavbarBrand>
-                            <Collapse isOpen={this.state.isNavOpen} className="ml-auto" navbar>                            
-                                <Nav className="mr-sm-2" navbar>
+                            <Collapse isOpen={this.state.isNavOpen} className="justify-content-end nav" justify="true" navbar>                            
+                                <Nav className="justify-content-end nav" justify="true" navbar>
                                     <NavItem>
                                         <RenderLoginButton isAuthenticated={this.props.bankingSession.isAuthenticated} toggleModal={this.toggleModal} logoutUser={this.props.logoutUser} />
                                     </NavItem>
@@ -97,12 +97,13 @@ class Header extends Component {
                                             <NavLink className="nav-link" to="/admin/accountHolders">Account Holders</NavLink>
                                         </NavItem>
                                     </Nav>
-                                    <Nav className="me-auto" navbar>
+                                    
+                                </Collapse>
+                                <Nav className="justify-content-end nav" justify="true" navbar>
                                         <NavItem>
                                             <RenderLoginButton isAuthenticated={this.props.bankingSession.isAuthenticated} toggleModal={this.toggleModal} logoutUser={this.props.logoutUser} />
                                         </NavItem>
-                                    </Nav>
-                                </Collapse>
+                                </Nav>
                             </div>
                         </Navbar>
                         <Modal isOpen={this.state.isModalOpen && this.props.bankingSession.isStarting} toggle={this.toggleModal}>
@@ -150,12 +151,12 @@ class Header extends Component {
                                             <NavLink className="nav-link" to="/cd-accounts">CD</NavLink>
                                         </NavItem>
                                     </Nav>
-                                    <Nav className="d-flex flex-row-reverse bd-highlight" navbar>
+                                </Collapse>
+                                <Nav className="justify-content-end nav" justify="true" navbar>
                                         <NavItem>
                                             <RenderLoginButton isAuthenticated={this.props.bankingSession.isAuthenticated} toggleModal={this.toggleModal} logoutUser={this.props.logoutUser} />
                                         </NavItem>
-                                    </Nav>
-                                </Collapse>
+                                </Nav>
                             </div>
                         </Navbar>
                         <Modal isOpen={this.state.isModalOpen && this.props.bankingSession.isStarting} toggle={this.toggleModal}>
