@@ -42,7 +42,7 @@ class MeritSavingsPage extends Component {
                     {
                         this.props.accountHolderData.accountHolder.savingsAccounts.map((account) => {
                             return (
-                                <AccountDisplay account={account}/>
+                                <AccountDisplay account={account} accounHolderData={this.props.accounHolderData}/>
                             );
                         })
                     }

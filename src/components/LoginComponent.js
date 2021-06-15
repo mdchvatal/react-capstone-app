@@ -25,7 +25,7 @@ class Login extends Component {
         this.props.loginUser(values.username, values.password);
         this.props.resetLoginForm();
         this.setState({submit: true});
-        this.props.fetchAccountHolderData(this.props.bankingSession.token);
+        //this.props.fetchAccountHolderData(this.props.bankingSession.token);
         
     }
 

@@ -115,6 +115,10 @@ class Header extends Component {
                     </React.Fragment>
                 );
             } else {
+                if (this.props.accountHolderData.accountHolder === null) {
+                    this.props.fetchAccountHolderData(this.props.bankingSession.token);
+                }
+                
                 return(
                     <React.Fragment>
                         <Navbar expand="md">
