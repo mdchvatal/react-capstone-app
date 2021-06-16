@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import { Alert, Table, Card, CardBody, CardText, Container, CardTitle, CardSubtitle} from 'reactstrap';
-import SavingsAccounts from './SavingsAccountsComponent';
-import PersonalChecking from './PersonalCheckingAccountsComponent';
-import DBAChecking from './DBACheckingComponent';
+import SavingsAccounts from './MeritSavingsAccountsComponent';
+import MeritCheckingAccounts from './MeritCheckingAccountsComponent';
 import {Loading} from './LoadingComponent'
 import MeritJumbotron from './MeritJumbtronComponent';
+import DBACheckingAccounts from './DBACheckingAccountsComponent';
 
 
 function RenderAccount({account}) {
@@ -63,8 +63,8 @@ class AccountHolderPage extends Component {
                         <h1>{this.props.accountHolderData.accountHolder.firstName} {this.props.accountHolderData.accountHolder.lastName}</h1>
                         <h2>Combined Balance: {this.props.accountHolderData.accountHolder.combinedBalance}</h2>
                         <SavingsAccounts accountHolderData={this.props.accountHolderData}/>
-                        <PersonalChecking accountHolderData={this.props.accountHolderData}/>
-                        <DBAChecking accountHolderData={this.props.accountHolderData}/>
+                        <MeritCheckingAccounts accountHolderData={this.props.accountHolderData}/>
+                        <DBACheckingAccounts accountHolderData={this.props.accountHolderData}/>
                     </Card>
                 </div>
 

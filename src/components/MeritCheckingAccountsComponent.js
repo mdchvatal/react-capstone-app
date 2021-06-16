@@ -15,34 +15,18 @@ function RenderAccount({account}) {
     );   
 } 
 
-class SavingsAccountPage extends Component {
+class MeritCheckingAccounts extends Component {
 constructor(props) {    
     super(props); 
 }
 
 render() {
-    if (this.props.accountHolderData.isLoading == true) {
+    if (this.props.accountHolderData.accountHolder.personalCheckingAccounts == null) {
         return(
-            <div className="container">
-                <div className="row align-items-start">
-                    <h1></h1>
-                    <Loading />
-                </div>
+            <div >
             </div>
         )
     } else {
-        if (this.props.errorMessage) {
-            return(
-                <div className="container">
-                    <div className="row align-items-start">
-                        <h1></h1>
-                        <Alert color="danger">
-                            {this.props.errorMessage}
-                        </Alert>
-                    </div>
-                </div>
-            );
-        } else {
             return(
                 <div className="container">
                     <div className="row align-items-start">
@@ -52,14 +36,14 @@ render() {
                                     <Table>
                                         <thead>
                                             <tr>
-                                                <th>Savings Account Number</th>
+                                                <th>Checking Account Number</th>
                                                 <th>Balance</th>
                                                 <th>Interest Rate</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
-                                                this.props.accountHolderData.accountHolder.savingsAccounts.map((account) => {
+                                                this.props.accountHolderData.accountHolder.personalCheckingAccounts.map((account) => {
                                                     return (
                                                         <RenderAccount account={account} />
                                                     );
@@ -76,6 +60,6 @@ render() {
         }
     }
 }
-}
 
-export default SavingsAccountPage;
+
+export default MeritCheckingAccounts;
