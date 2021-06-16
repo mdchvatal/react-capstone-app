@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchAccountHolderData: (jwt) => dispatch(fetchAccountHolderData(jwt))
 })
 
-class MeritCheckingPage extends Component {
+class DBACheckingPage extends Component {
     constructor(props) {    
         super(props);
     }
@@ -31,7 +31,7 @@ class MeritCheckingPage extends Component {
         
 
     render () {
-        if (this.props.accountHolderData.accountHolder.personalCheckingAccounts[0] === null) {
+        if (this.props.accountHolderData.accountHolder.dbaCheckingAccounts[0] === null) {
             return(
                 <Redirect to="/account-holder"/>
             )
@@ -53,10 +53,10 @@ class MeritCheckingPage extends Component {
                         <MeritJumbotron/>
                         <Card className="text-center">
                             {
-                                this.props.accountHolderData.accountHolder.personalCheckingAccounts.map((account) => {
+                                this.props.accountHolderData.accountHolder.dbaCheckingAccounts.map((account) => {
                                     return (
                                         <div>
-                                            <h1>Merit Checking Account #{account.id}</h1>
+                                            <h1>DBA Checking Account #{account.id}</h1>
                                             <h2>Account Balance: {account.balance}</h2>
                                             <AccountDisplay account={account} accountHolderData={this.props.accountHolderData}/>
                                         </div>
@@ -72,4 +72,4 @@ class MeritCheckingPage extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MeritCheckingPage));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DBACheckingPage));

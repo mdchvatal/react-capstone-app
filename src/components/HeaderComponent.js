@@ -131,7 +131,7 @@ class Header extends Component {
                                         <UncontrolledDropdown nav inNavbar>
                                             <DropdownToggle nav caret>Checking</DropdownToggle>
                                             <DropdownMenu right>
-                                                <DropdownItem tag={Link} to="/checking/merit-checking">Merit Checking</DropdownItem>
+                                                <DropdownItem tag={Link} to="/account-holder/merit-checking">Merit Checking</DropdownItem>
                                                 <DropdownItem tag={Link} to="/checking/business-checking">Business Checking</DropdownItem>
                                             </DropdownMenu>
                                         </UncontrolledDropdown>

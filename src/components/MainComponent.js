@@ -9,6 +9,8 @@ import Footer from './FooterComponent';
 import AdminHome from './AdminHomeComponent';
 import AdminUsers from './AdminUsersComponent';
 import MeritSavingsPage from './MeritSavingsPageComponent';
+import MeritCheckingPage from './MeritCheckingPageComponent';
+import DBACheckingAccountPage from './DBACheckingAccountPageComponent'
 import AdminCDOfferings from './AdminCDOfferingsComponent';
 import AccountHolderPage from './AccountHolderPageComponent';
 import AdminAccountHolders from './AdminAccountHoldersComponent';
@@ -105,6 +107,8 @@ class Main extends Component {
                                                             accountHolderData={this.props.accountHolderData} 
                                                             fetchAccountHolderData={this.props.fetchAccountHolderData} 
                                                             bankingSession={this.props.bankingSession}/>}/>
+                            <Route exact path='/account-holder/merit-checking' component={() => <MeritCheckingPage/>}/>
+                            <Route exact path='/account-holder/dba-checking' component={() => <DBACheckingAccountPage/>}/>                                           
                             <Route exact path='/admin' component={AdminHome} />
                             <Route exact path='/admin/users' component={AdminUsersPage} />
                             <Route exact path='/admin/cdOfferings' component={AdminCDOfferingsPage} />
