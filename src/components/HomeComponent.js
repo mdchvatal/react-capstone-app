@@ -8,6 +8,13 @@ class Home extends Component {
         super(props);
     }
 
+    componentWillUnmount() {
+        if (this.props.accountHolderData.accountHolder == null && this.props.bankingSession.token != null) {
+            this.props.fetchAccountHolderData(this.props.bankingSession.token);
+        }
+        
+    }
+
     render () {
         return(
             <Jumbotron className=".container-fluid" style={{ backgroundImage:"linear-gradient(rgba(350,350,350,0.3), rgba(350,350,350,0.3)), url(assets/images/Dallas-Skyline-for-web.jpg)",

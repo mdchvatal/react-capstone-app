@@ -20,9 +20,9 @@ class MeritJumbotron extends Component {
                     <div className="form-inline justify-content-center">
                         <div className="col-4">
                         </div>
-                        <div class="row justify-content-center">
-                            <div class="col-1">
-                                <img alt="logo" src="assets/images/merit_logo.png" alt="Merit Bank Logo" height='75' borderRadius= '50%'/>
+                        <div className="row justify-content-center">
+                            <div className="col-1">
+                                <img alt="logo" src="assets/images/merit_logo.png" alt="Merit Bank Logo" height='75'/>
                             </div>
                         </div>
                         

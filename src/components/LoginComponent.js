@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, Input, Label, Col, Row } from 'reactstrap';
 import { Control, Form, Errors } from 'react-redux-form';
 import { Link, NavLink, Redirect, withRouter} from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 
 const required = (val) => val && val.length;
@@ -21,21 +22,19 @@ class Login extends Component {
     
     handleSubmit(values) {
         console.log("Submit values: " + values);
+        if (this.props.bankingSession.token === null) {
+            this.props.loginUser(values.username, values.password);
+        }
         this.props.bankingSession.isStarting = true;
-        this.props.loginUser(values.username, values.password);
         this.props.resetLoginForm();
-        this.setState({submit: true});
-        //
-        
     }
 
     render() {
-        if (this.props.bankingSession != null && this.props.bankingSession.role === 'ADMIN') {
+         if (this.props.bankingSession != null && this.props.bankingSession.role === 'ADMIN') {
             return (
                 <Redirect to="/admin"/>
             )
         } else if (this.props.bankingSession != null && this.props.bankingSession.role == "USER") {
-            this.props.fetchAccountHolderData(this.props.bankingSession.token);
             return (
                 <Redirect to="/account-holder"/>
             )

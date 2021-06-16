@@ -43,7 +43,7 @@ export const loginUser = (username, password) => (dispatch) => {
 export const loginSucceeded = (data) => ({
     type: ActionTypes.USER_LOGIN_SUCCEEDED,
     payload: data
-});
+})
 
 export const loginFailed = (errorMessage) => ({
     type: ActionTypes.USER_LOGIN_FAILED,

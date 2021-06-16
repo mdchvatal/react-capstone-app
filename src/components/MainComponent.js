@@ -44,9 +44,7 @@ class Main extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        // Load any data here.
-    }
+  
 
     render() {
         console.log('Main Component Props on render:');
@@ -94,7 +92,7 @@ class Main extends Component {
                         <Switch location={this.props.location}>
                             <Route path='/home' component={() => <Home loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} 
                                 resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession}
-                                fetchAccountHolderData={this.props.fetchAccountHolderData}/>} />
+                                fetchAccountHolderData={this.props.fetchAccountHolderData} accountHolderData={this.props.accountHolderData}/>} />
                             <Route exact path='/account-holder' component={() =>  <AccountHolderPage
                                                             status={this.props.accountHolderData.status}
                                                             errorMessage={this.props.accountHolderData.errorMessage}

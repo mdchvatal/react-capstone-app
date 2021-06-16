@@ -7,7 +7,7 @@ import Login from './LoginComponent';
 function RenderLoginButton({isAuthenticated, toggleModal, logoutUser}) {
     if (isAuthenticated) {
         return (
-            <Button outline onClick={() => {logoutUser()}}><span className="fa fa-sign-in fa-lg"></span>Sign Out</Button>
+            <Button outline onClick={logoutUser}><span className="fa fa-sign-in fa-lg"></span>Sign Out</Button>
         );
     } else {
         return (

@@ -4,7 +4,7 @@ import MeritJumbotron from './MeritJumbtronComponent';
 import AccountDisplay from './AccountTransactionsDisplayComponent';
 import { Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolders, fetchAccountHolderData } from '../redux/ActionCreators';
+import { fetchAccountHolders, fetchAccountHolderData } from '../redux/ActionCreators';
 
 
 const mapStateToProps = (state) => {
@@ -31,7 +31,7 @@ class DBACheckingPage extends Component {
         
 
     render () {
-        if (this.props.accountHolderData.accountHolder.dbaCheckingAccounts[0] === null) {
+        if (this.props.accountHolderData.accountHolder.dbaCheckingAccounts[0] == null) {
             return(
                 <Redirect to="/account-holder"/>
             )

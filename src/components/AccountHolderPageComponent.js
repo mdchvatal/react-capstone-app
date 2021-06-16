@@ -25,15 +25,13 @@ class AccountHolderPage extends Component {
         super(props); 
     }
         
-
+    
     render () {
-        if (this.props.bankingSession.token != null) {
-            ;
-        }
-        if (this.props.loading) {
+        if (this.props.accountHolderData.status === 'loading') {
             return(
                 
                 <div className="container">
+                    <MeritJumbotron/>
                     <div className="row align-items-start">
                         <h1>Account Holders</h1>
                         <Loading />
@@ -41,19 +39,10 @@ class AccountHolderPage extends Component {
                 </div>
             )
         } else {
-            if (this.props.errorMessage) {
+            if (this.props.accountHolderData.accountHolder === null) {
+                
                 return(
-                <div>
-                    <MeritJumbotron/>
-                    <div className="container">
-                        <div className="row align-items-start">
-                            <h1>Account Holders</h1>
-                            <Alert color="danger">
-                                {this.props.errorMessage}
-                            </Alert>
-                        </div>
-                    </div>
-                </div>    
+                    <div/>    
                 );
             } else {
                 return(
