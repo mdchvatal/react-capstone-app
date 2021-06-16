@@ -16,13 +16,13 @@ function RenderAccount({account}) {
     );   
 } 
 
-class SavingsAccounts extends Component {
+class CDAccounts extends Component {
 constructor(props) {    
     super(props); 
 }
 
 render() {
-    if (this.props.accountHolderData.accountHolder.savingsAccounts[0] == null) {
+    if (this.props.accountHolderData.accountHolder.cdAccounts[0] == null) {
         return(
             <div>
             </div>
@@ -38,14 +38,14 @@ render() {
                                     <Table>
                                         <thead>
                                             <tr>
-                                                <th>Savings Account Number</th>
+                                                <th>CD Account Number</th>
                                                 <th>Balance</th>
                                                 <th>Interest Rate</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
-                                                this.props.accountHolderData.accountHolder.savingsAccounts.map((account) => {
+                                                this.props.accountHolderData.accountHolder.cdAccounts.map((account) => {
                                                     return (
                                                         <RenderAccount account={account} />
                                                     );
@@ -65,4 +65,4 @@ render() {
 }
 }
 
-export default SavingsAccounts;
+export default CDAccounts;

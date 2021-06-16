@@ -36,7 +36,7 @@ render() {
                                     <Table>
                                         <thead>
                                             <tr>
-                                                <th>Checking Account Number</th>
+                                                <th>Merit Checking Account Number</th>
                                                 <th>Balance</th>
                                                 <th>Interest Rate</th>
                                             </tr>

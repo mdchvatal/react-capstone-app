@@ -7,6 +7,7 @@ import MeritCheckingAccounts from './MeritCheckingAccountsComponent';
 import {Loading} from './LoadingComponent'
 import MeritJumbotron from './MeritJumbtronComponent';
 import DBACheckingAccounts from './DBACheckingAccountsComponent';
+import CDAccounts from './CDAccountsComponent';
 
 
 function RenderAccount({account}) {
@@ -18,7 +19,7 @@ function RenderAccount({account}) {
                 </tr>
         );   
 } 
-
+//TODO: implement error handling
 class AccountHolderPage extends Component {
     constructor(props) {    
         super(props); 
@@ -26,7 +27,6 @@ class AccountHolderPage extends Component {
         
 
     render () {
-        
         if (this.props.bankingSession.token != null) {
             ;
         }
@@ -65,6 +65,7 @@ class AccountHolderPage extends Component {
                         <SavingsAccounts accountHolderData={this.props.accountHolderData}/>
                         <MeritCheckingAccounts accountHolderData={this.props.accountHolderData}/>
                         <DBACheckingAccounts accountHolderData={this.props.accountHolderData}/>
+                        <CDAccounts accountHolderData={this.props.accountHolderData}/>
                     </Card>
                 </div>
 
