@@ -93,13 +93,13 @@ class Main extends Component {
                             <Route path='/home' component={() => <Home loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} 
                                 resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession}
                                 fetchAccountHolderData={this.props.fetchAccountHolderData}/>} />
-                            <Route path='/account-holder' component={() =>  <AccountHolderPage
+                            <Route exact path='/account-holder' component={() =>  <AccountHolderPage
                                                             status={this.props.accountHolderData.status}
                                                             errorMessage={this.props.accountHolderData.errorMessage}
                                                             accountHolderData={this.props.accountHolderData} 
                                                             fetchAccountHolderData={this.props.fetchAccountHolderData} 
                                                             bankingSession={this.props.bankingSession}/>}/>
-                            <Route path='/account-holder/merit-savings' component={() =>  <MeritSavingsPage
+                            <Route exact path='/account-holder/merit-savings' component={() =>  <MeritSavingsPage
                                                             status={this.props.accountHolderData.status}
                                                             errorMessage={this.props.accountHolderData.errorMessage}
                                                             accountHolderData={this.props.accountHolderData} 

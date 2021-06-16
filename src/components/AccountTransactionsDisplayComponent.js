@@ -12,6 +12,8 @@ function RenderTransaction({transaction}) {
                 <td>{transaction.origin}</td>
                 <td>{transaction.amount}</td>
                 <td>{transaction.transactionType}</td>
+                <td>{new Date(transaction.transactionDate).toLocaleString()}</td>
+                <td></td>
             </tr>
     );   
 } 
@@ -58,6 +60,7 @@ render() {
                                                 <th>Transaction Origin</th>
                                                 <th>Amount</th>
                                                 <th>Transaction Type</th>
+                                                <th>Transaction Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>

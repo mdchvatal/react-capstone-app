@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import { Alert, Table, Card, CardBody, CardText, Container, CardTitle, CardSubtitle} from 'reactstrap';
-import SavingsAccounts from './SavingsAccountComponent';
-import PersonalChecking from './PersonalCheckingComponent';
+import SavingsAccounts from './SavingsAccountsComponent';
+import PersonalChecking from './PersonalCheckingAccountsComponent';
 import DBAChecking from './DBACheckingComponent';
 import {Loading} from './LoadingComponent'
 import MeritJumbotron from './MeritJumbtronComponent';
