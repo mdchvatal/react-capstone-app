@@ -23,6 +23,15 @@
   color: white;
 }
 
+.footer{
+  margin-top: 15px;
+}
+
+#transferSubmit{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 #transfer{
   margin-bottom: 15px;
 

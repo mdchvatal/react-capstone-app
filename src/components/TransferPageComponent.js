@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Label, Col, Row, Card } from 'reactstrap';
+import { Button, Label, Col, Row, Card, CardTitle } from 'reactstrap';
 import { Control, Form } from 'react-redux-form';
 import MeritJumbotron from './MeritJumbtronComponent';
 import {connect} from 'react-redux';
@@ -7,10 +7,15 @@ import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolder
 
 
 
+//validators={{required, minLength: minLength(3), maxLength: maxLength(15), isNumber}}
+/*
+<Errors className="text-danger" model='.phone#' show="touched" messages={{required: 'Required', minLength: 'Must be longer than 2 digits.', maxLength: 'Must be less than 15 digits', isNumber: 'Must contain only numbers'}}/>
+*/
+
 const mapStateToProps = (state) => {
 	return {
 		bankingSession: state.bankingSession,
-        accountHolderData: state.accountHolderData
+        accountHolder: state.accountHolderData.accountHolder
 	}
 }
 
@@ -18,33 +23,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchAccountHolderData: (jwt) => dispatch(fetchAccountHolderData(jwt))
 })
 
-function MeritCheckingOptions() {
-    if (this.props.accountHolder.personalCheckingAccounts[0] == 'null') {
-        return (
-            <option>No Valid Merit Checking Accounts</option>
-        )
-    } else {
-        this.props.accountHolder.personalCheckingAccounts.map((account) => {
-            return(
-                <option>Merit Checking #{account.id}</option>
-            );
-        });
-    }
-}
 
-function DBACheckingOptions() {
-    if (this.props.accountHolder.dbaCheckingAccounts[0] == 'null') {
-        return (
-            <option>No Valid Business Checking Accounts</option>
-        )
-    } else {
-        this.props.accountHolder.dbaCheckingAccounts.map((account) => {
-            return(
-                <option>Business Checking #{account.id}</option>
-            );
-        });
-    }
-}
 
 class TransferPage extends Component {
     constructor(props){
@@ -54,42 +33,74 @@ class TransferPage extends Component {
 
     }
 
-    handleSubmit() {
+    handleSubmit(values) {
         //not yet
     }
 
+
     render() {
+
+       
+
         return(
             <div >
                 <MeritJumbotron/>
-                <Card>
-                    <Form model="transfer" onSubmit={(values) => this.handleSubmit(values)}>
-                        <Row className="form-group">
-                            <Label htmlFor="username" className="col-form-label">From Account </Label>
-                            <Col md={10}>
-                                <div>
-                                    <h4>{this.props.fromAccount}</h4>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="form-group">
-                            <Label htmlFor="password" className="col-form-label">Last Name</Label>
-                            <Col md={10}>
-                                <Control.select model="toAccount" className="form-control" name="toAccount">
-                                    <MeritCheckingOptions/>
-                                    <DBACheckingOptions/>
-                                </Control.select>
-                            </Col>
-                        </Row>
-                        <Row className="form-group">
-                            <Col md={{size:10, offset: 2}}>
-                                <Button type="submit" color="primary">
-                                    Transfer
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Form>
-                </Card>
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <Card className="card text-center">
+                        <CardTitle><h2>Transfer Money</h2></CardTitle>
+                            <Form model="transfer" onSubmit={(values) => this.handleSubmit(values)}>
+                                <Row className="form-group d-flex justify-content-center">
+                                    <Label htmlFor="fromAccount" className="col-form-label offset-2" >Transfer From Account </Label>
+                                    <Col md={10}>
+                                        <Control.select model="fromAccount" className="form-control" name="fromAccount">
+                                        
+                                        {this.props.accountHolder.personalCheckingAccounts?.map((account) =>
+                                                    <option key={account.id} value={account.id}>Merit Checking Account #{account.id}: ${account.balance}</option>)}
+                                        {this.props.accountHolder.dbaCheckingAccounts?.map((account) =>
+                                                <option key={account.id} value={account.id}>Business Checking Account #{account.id}: ${account.balance}</option>)}
+                                        {this.props.accountHolder.savingsAccounts?.map((account) =>
+                                                <option key={account.id} value={account.id}>Savings Account #{account.id}: ${account.balance}</option>)}
+                                        {this.props.accountHolder.iraAccounts?.map((account) =>
+                                                <option key={account.id} value={account.id}>IRA Account #{account.id}: ${account.balance}</option>)}
+                                    
+                                        </Control.select>
+                                    </Col>
+                                </Row>
+                                <Row className="form-group d-flex justify-content-center">
+                                    <Label htmlFor="toAccount" className="col-form-label offset-2">Transfer To Account</Label>
+                                    <Col md={10}>
+                                        <Control.select model="toAccount" className="form-control" name="toAccount">
+                                            {this.props.accountHolder.personalCheckingAccounts?.map((account) =>
+                                                    <option key={account.id} value={account.id}>Merit Checking Account #{account.id}: ${account.balance}</option>)}
+                                            {this.props.accountHolder.dbaCheckingAccounts?.map((account) =>
+                                                    <option key={account.id} value={account.id}>Business Checking Account #{account.id}: ${account.balance}</option>)}
+                                            {this.props.accountHolder.savingsAccounts?.map((account) =>
+                                                    <option key={account.id} value={account.id}>Savings Account #{account.id}: ${account.balance}</option>)}
+                                            {this.props.accountHolder.iraAccounts?.map((account) =>
+                                                    <option key={account.id} value={account.id}>IRA Account #{account.id}: ${account.balance}</option>)}
+                                        </Control.select>
+                                    </Col>
+                                </Row>
+                                <Row className="form-group d-flex justify-content-center">
+                                    <Label htmlFor="transferAmount" className="col-form-label offset-2">Amount To Transfer</Label>
+                                    <Col md={10}>
+                                        <Control.text model=".transferAmount" id="transferAmount" name="transferAmount" placeholder="Amount $" className="form-control" />
+                                        
+                                    </Col>
+                                </Row>
+                                <Row className="d-flex justify-content-center">
+                                    <Col md={10}>
+                                        <Button outline id="transferSubmit" type="submit" color="secondary">
+                                        <span className="fa fa-money"></span>
+                                            Transfer
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </Form>
+                        </Card>
+                    </div>
+                </div>
             </div>
 
         )

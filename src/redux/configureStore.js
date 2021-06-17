@@ -7,7 +7,7 @@ import { AccountHolders } from './accountHolders';
 import { AccountHolderData } from './accountHolderDataReducer';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { InitialCredentials } from './forms';
+import { InitialCredentials, InitialTransfer } from './forms';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 
@@ -21,7 +21,8 @@ export const ConfigureStore = () => {
             accountHolderData: AccountHolderData,
             bankingSession: BankingSession,
             ...createForms({
-                credentials: InitialCredentials
+                credentials: InitialCredentials,
+                transfer: InitialTransfer
             })
         }),
         composeWithDevTools(applyMiddleware(thunk, logger))
