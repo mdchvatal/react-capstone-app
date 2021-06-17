@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Alert,  Card} from 'reactstrap';
 import MeritJumbotron from './MeritJumbtronComponent';
 import AccountDisplay from './AccountTransactionsDisplayComponent';
-import { Redirect, withRouter} from 'react-router-dom';
+import { Link, Redirect, withRouter} from 'react-router-dom';
+import TransferButton from './TransferButtonComponent';
 import {connect} from 'react-redux';
 import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolders, fetchAccountHolderData } from '../redux/ActionCreators';
 
@@ -63,7 +64,11 @@ class MeritCheckingPage extends Component {
                                     );
                                 })
                             }
+                            <div className="row justify-content-center">
+                                <div className="col-2" id="transfer"><Link to='/account-holder/transfer'><TransferButton/></Link></div>
+                            </div>
                         </Card>
+                        
                     </div>
 
                 )

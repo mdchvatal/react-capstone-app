@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
+import { Link, Redirect, withRouter} from 'react-router-dom';
+import TransferButton from './TransferButtonComponent';
+
 import {connect} from 'react-redux';
 import { Alert, Table, Card, CardBody, CardText, Container, CardTitle, CardSubtitle} from 'reactstrap';
 import SavingsAccounts from './MeritSavingsAccountsComponent';
@@ -55,10 +57,11 @@ class AccountHolderPage extends Component {
                         <MeritCheckingAccounts accountHolderData={this.props.accountHolderData}/>
                         <DBACheckingAccounts accountHolderData={this.props.accountHolderData}/>
                         <CDAccounts accountHolderData={this.props.accountHolderData}/>
+                        <div className="row justify-content-center">
+                            <div className="col-2" id="transfer"><Link to='/account-holder/transfer'><TransferButton/></Link></div>
+                        </div>
                     </Card>
-                    <div className="row justify-content-center">
-                            <div className="col-2" id="transfer"></div>
-                    </div>
+                    
                 </div>
 
                 )

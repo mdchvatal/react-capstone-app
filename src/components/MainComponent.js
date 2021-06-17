@@ -102,7 +102,7 @@ class Main extends Component {
                                                             accountHolderData={this.props.accountHolderData} 
                                                             fetchAccountHolderData={this.props.fetchAccountHolderData} 
                                                             bankingSession={this.props.bankingSession}/>}/>
-                            <Route  path='/account-holder/transfer' component={() => <TransferPage/>}/>                               
+                            <Route exact path='/account-holder/transfer' component={() => <TransferPage/>}/>                               
                             <Route exact path='/account-holder/merit-savings' component={() =>  <MeritSavingsPage
                                                             status={this.props.accountHolderData.status}
                                                             errorMessage={this.props.accountHolderData.errorMessage}
