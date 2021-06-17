@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Alert, Button, Card} from 'reactstrap';
+import { Alert,  Card} from 'reactstrap';
 import MeritJumbotron from './MeritJumbtronComponent';
 import AccountDisplay from './AccountTransactionsDisplayComponent';
-import { Link, Redirect, withRouter} from 'react-router-dom';
-import TransferButton from './TransferButtonComponent';
+import { Redirect, withRouter} from 'react-router-dom';
 
-
-class MeritSavingsPage extends Component {
+class CDAccountsPage extends Component {
     constructor(props) {    
         super(props);
     }
@@ -15,7 +13,7 @@ class MeritSavingsPage extends Component {
         
 
     render () {
-        if (this.props.accountHolderData.accountHolder.savingsAccounts[0] === null) {
+        if (this.props.accountHolderData.accountHolder.cdAccounts[0] === null) {
             return(
                 <Redirect to="/account-holder"/>
             )
@@ -40,16 +38,13 @@ class MeritSavingsPage extends Component {
                                 this.props.accountHolderData.accountHolder.savingsAccounts.map((account) => {
                                     return (
                                         <div>
-                                            <h1>Merit Savings Account #{account.id}</h1>
-                                            <h2>Account Balance: ${account.balance}</h2>
+                                            <h1>CD Account #{account.id}</h1>
+                                            <h2>Account Balance: {account.balance}</h2>
                                             <AccountDisplay account={account} accountHolderData={this.props.accountHolderData}/>
                                         </div>
                                     );
                                 })
                             }
-                            <div className="row justify-content-center">
-                                <div className="col-2" id="transfer"><Link to='/account-holder/transfer'><TransferButton/></Link></div>
-                            </div>
                         </Card>
                     </div>
 
@@ -59,4 +54,4 @@ class MeritSavingsPage extends Component {
     }
 }
 
-export default withRouter(MeritSavingsPage);
+export default withRouter(CDAccountsPage);

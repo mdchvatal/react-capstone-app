@@ -56,6 +56,9 @@ class AccountHolderPage extends Component {
                         <DBACheckingAccounts accountHolderData={this.props.accountHolderData}/>
                         <CDAccounts accountHolderData={this.props.accountHolderData}/>
                     </Card>
+                    <div className="row justify-content-center">
+                            <div className="col-2" id="transfer"></div>
+                    </div>
                 </div>
 
                 )

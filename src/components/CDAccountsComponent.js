@@ -12,6 +12,7 @@ function RenderAccount({account}) {
                 <th scope="row">{account.id}</th>
                 <td>{account.balance}</td>
                 <td>{account.interestRate}</td>
+                <td>{new Date(account.openedOn).toLocaleString()}</td>
             </tr>
     );   
 } 
@@ -41,6 +42,7 @@ render() {
                                                 <th>CD Account Number</th>
                                                 <th>Balance</th>
                                                 <th>Interest Rate</th>
+                                                <th>Deposit Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>

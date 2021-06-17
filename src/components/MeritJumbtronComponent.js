@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Jumbotron, Card, CardBody, CardText, Container, CardTitle} from 'reactstrap';
+import { Jumbotron } from 'reactstrap';
 
 
 class MeritJumbotron extends Component {
@@ -17,7 +17,7 @@ class MeritJumbotron extends Component {
                                                             objectFit: 'none',
                                                             opacity: '0.9'}}>
                 <div className="container">
-                    <div className="form-inline justify-content-center">
+                    <div className="row justify-content-center">
                         <div className="col-4">
                         </div>
                         <div className="row justify-content-center">

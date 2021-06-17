@@ -8,6 +8,8 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import AdminHome from './AdminHomeComponent';
 import AdminUsers from './AdminUsersComponent';
+import TransferPage from './TransferPageComponent';
+import CDAccountsPage from './CDAccountsPageComponent';
 import MeritSavingsPage from './MeritSavingsPageComponent';
 import MeritCheckingPage from './MeritCheckingPageComponent';
 import DBACheckingAccountPage from './DBACheckingAccountPageComponent'
@@ -18,6 +20,7 @@ import AdminAccountHolders from './AdminAccountHoldersComponent';
 
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 
 const mapStateToProps = (state) => {
 	return {
@@ -99,6 +102,7 @@ class Main extends Component {
                                                             accountHolderData={this.props.accountHolderData} 
                                                             fetchAccountHolderData={this.props.fetchAccountHolderData} 
                                                             bankingSession={this.props.bankingSession}/>}/>
+                            <Route  path='/account-holder/transfer' component={() => <TransferPage/>}/>                               
                             <Route exact path='/account-holder/merit-savings' component={() =>  <MeritSavingsPage
                                                             status={this.props.accountHolderData.status}
                                                             errorMessage={this.props.accountHolderData.errorMessage}
@@ -106,7 +110,9 @@ class Main extends Component {
                                                             fetchAccountHolderData={this.props.fetchAccountHolderData} 
                                                             bankingSession={this.props.bankingSession}/>}/>
                             <Route exact path='/account-holder/merit-checking' component={() => <MeritCheckingPage/>}/>
-                            <Route exact path='/account-holder/dba-checking' component={() => <DBACheckingAccountPage/>}/>                                           
+                            <Route exact path='/account-holder/dba-checking' component={() => <DBACheckingAccountPage/>}/> 
+                            <Route exact path='/account-holder/cd-account' component={() => <CDAccountsPage/>}/>    
+                                                         
                             <Route exact path='/admin' component={AdminHome} />
                             <Route exact path='/admin/users' component={AdminUsersPage} />
                             <Route exact path='/admin/cdOfferings' component={AdminCDOfferingsPage} />
