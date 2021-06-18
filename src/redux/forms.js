@@ -4,7 +4,7 @@ export const InitialCredentials = {
 };
 
 export const InitialTransfer = {
-    fromAccount: 'Choose an Account',
-    toAccount: 'Choose an Account',
+    fromAccount: '',
+    toAccount: '',
     transferAmount: ''
 }

@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { InitialCredentials, InitialTransfer } from './forms';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { TransferData } from './transferReducer';
 
 
 
@@ -20,6 +21,7 @@ export const ConfigureStore = () => {
             accountHolders: AccountHolders, 
             accountHolderData: AccountHolderData,
             bankingSession: BankingSession,
+            transferStatus: TransferData,
             ...createForms({
                 credentials: InitialCredentials,
                 transfer: InitialTransfer

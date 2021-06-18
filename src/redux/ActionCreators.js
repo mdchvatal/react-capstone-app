@@ -235,3 +235,52 @@ export const addAccoutHolderData = (accHolderData) => ({
     type: ActionTypes.ADD_AHDATA,
     payload: accHolderData
 });
+
+export const postTransfer = (jwt, fromAccountId, toAccountId, transactionAmount) => (dispatch) => {
+    const transferBody = {
+        amount: transactionAmount,
+        origin: 'Transfer',
+        transactionType: 'transfer',
+        
+    };
+    dispatch(transferLoading);
+    
+    return fetch(baseUrl + 'me/' + fromAccountId + '/' + toAccountId + '/add-transfer', {
+        method: "POST",
+        body: JSON.stringify(transferBody),
+        headers: {
+            "Authorization": `Bearer ${jwt}`,
+        },
+
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('That\'s a ' + response.status + '. That means there was a problem.')
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch((error) => 
+            dispatch(transferFailed(error.message)));
+};
+
+export const transferLoading = () => ({
+    type: ActionTypes.POST_TRANSFER_LOADING
+});
+
+export const transferFailed = (errmess) => ({
+    type: ActionTypes.POST_TRANSFER_FAILED,
+    payload: errmess
+});
+
+export const transferSucceeded = () => ({
+    type: ActionTypes.POST_TRANSFER_SUCCEEDED
+})

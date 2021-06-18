@@ -6,12 +6,6 @@ import {connect} from 'react-redux';
 import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolders, fetchAccountHolderData } from '../redux/ActionCreators';
 
 
-
-//validators={{required, minLength: minLength(3), maxLength: maxLength(15), isNumber}}
-/*
-<Errors className="text-danger" model='.phone#' show="touched" messages={{required: 'Required', minLength: 'Must be longer than 2 digits.', maxLength: 'Must be less than 15 digits', isNumber: 'Must contain only numbers'}}/>
-*/
-
 const mapStateToProps = (state) => {
 	return {
 		bankingSession: state.bankingSession,
@@ -34,14 +28,12 @@ class TransferPage extends Component {
     }
 
     handleSubmit(values) {
-        //not yet
+        alert(JSON.stringify(values));
+        console.log(values);
     }
 
 
     render() {
-
-       
-
         return(
             <div >
                 <MeritJumbotron/>
@@ -51,26 +43,26 @@ class TransferPage extends Component {
                         <CardTitle><h2>Transfer Money</h2></CardTitle>
                             <Form model="transfer" onSubmit={(values) => this.handleSubmit(values)}>
                                 <Row className="form-group d-flex justify-content-center">
-                                    <Label htmlFor="fromAccount" className="col-form-label offset-2" >Transfer From Account </Label>
+                                    <Label htmlFor="from-account" value="Please Select an Account" className="col-form-label offset-2" >Transfer From Account </Label>
                                     <Col md={10}>
-                                        <Control.select model="fromAccount" className="form-control" name="fromAccount">
-                                        
-                                        {this.props.accountHolder.personalCheckingAccounts?.map((account) =>
+                                        <Control.select model=".fromAccount" id="fromAccount" className="form-control" name="fromAccount">
+                                            <option value='0'>Please Select Account</option>
+                                            {this.props.accountHolder.personalCheckingAccounts?.map((account) =>
                                                     <option key={account.id} value={account.id}>Merit Checking Account #{account.id}: ${account.balance}</option>)}
-                                        {this.props.accountHolder.dbaCheckingAccounts?.map((account) =>
-                                                <option key={account.id} value={account.id}>Business Checking Account #{account.id}: ${account.balance}</option>)}
-                                        {this.props.accountHolder.savingsAccounts?.map((account) =>
-                                                <option key={account.id} value={account.id}>Savings Account #{account.id}: ${account.balance}</option>)}
-                                        {this.props.accountHolder.iraAccounts?.map((account) =>
-                                                <option key={account.id} value={account.id}>IRA Account #{account.id}: ${account.balance}</option>)}
-                                    
+                                            {this.props.accountHolder.dbaCheckingAccounts?.map((account) =>
+                                                    <option key={account.id} value={account.id}>Business Checking Account #{account.id}: ${account.balance}</option>)}
+                                            {this.props.accountHolder.savingsAccounts?.map((account) =>
+                                                    <option key={account.id} value={account.id}>Savings Account #{account.id}: ${account.balance}</option>)}
+                                            {this.props.accountHolder.iraAccounts?.map((account) =>
+                                                    <option key={account.id} value={account.id}>IRA Account #{account.id}: ${account.balance}</option>)}
                                         </Control.select>
                                     </Col>
                                 </Row>
                                 <Row className="form-group d-flex justify-content-center">
-                                    <Label htmlFor="toAccount" className="col-form-label offset-2">Transfer To Account</Label>
+                                    <Label htmlFor="to-account" className="col-form-label offset-2" >Transfer To Account </Label>
                                     <Col md={10}>
-                                        <Control.select model="toAccount" className="form-control" name="toAccount">
+                                        <Control.select value="Please Select an Account" model=".toAccount" id="toAccount" className="form-control" name="toAccount">
+                                            <option value='0'>Please Select Account</option>
                                             {this.props.accountHolder.personalCheckingAccounts?.map((account) =>
                                                     <option key={account.id} value={account.id}>Merit Checking Account #{account.id}: ${account.balance}</option>)}
                                             {this.props.accountHolder.dbaCheckingAccounts?.map((account) =>
