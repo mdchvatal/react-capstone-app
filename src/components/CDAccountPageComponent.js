@@ -6,7 +6,7 @@ import { Control, Form } from 'react-redux-form';
 import AccountDisplay from './AccountTransactionsDisplayComponent';
 import MeritJumbotron from './MeritJumbtronComponent';
 import {connect} from 'react-redux';
-import { postTransfer, fetchAccountHolderData, fetchCDOfferings } from '../redux/ActionCreators';
+import { postTransfer, fetchAccountHolderData, fetchCDOfferings, postCDAccount } from '../redux/ActionCreators';
 
 
 const mapStateToProps = (state) => {
@@ -22,6 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchAccountHolderData: (jwt) => dispatch(fetchAccountHolderData(jwt)),
     postTransfer: (jwt, fromAccountId, toAccountId, transactionAmount) => dispatch(postTransfer(jwt, fromAccountId, toAccountId, transactionAmount)),
     fetchCDOfferings: (bankingSession) => dispatch(fetchCDOfferings(bankingSession)),
+    postCDAccount: (jwt, fromAccountId, cdOfferingId, transactionAmount) => dispatch(postCDAccount(jwt, fromAccountId, cdOfferingId, transactionAmount))
 })
 
 
@@ -35,13 +36,14 @@ class CDAccountPage extends Component {
     }
 
     componentDidMount() {
-        
+        //causes infinite call loop
     }
 
     handleSubmit(values) {
-       
+        this.props.postCDAccount(this.props.jwt, values.sourceAccount, values.offering, values.transferAmount);
         console.log(values);
-        alert(JSON.stringify(values));
+        alert(`You have successfully created a new Certificate of Deposit Account with a balance of ${values.transferAmount}`);
+        this.props.fetchAccountHolderData(this.props.jwt);
     }
 
 

@@ -285,3 +285,51 @@ export const transferFailed = (errmess) => ({
 export const transferSucceeded = () => ({
     type: ActionTypes.POST_TRANSFER_SUCCEEDED
 })
+
+export const postCDAccount = (jwt, fromAccountId, cdOfferingId, transactionAmount) => (dispatch) => {
+    const transferBody = {
+        amount: transactionAmount,
+        
+    };
+    dispatch(postCDLoading);
+    
+    return fetch(baseUrl + 'me/' + fromAccountId + '/' + cdOfferingId + '/add-cd-account', {
+        method: "POST",
+        body: transactionAmount,
+        headers: {
+            "Authorization": `Bearer ${jwt}`,
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('That\'s a ' + response.status + '. That means there was a problem.')
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch((error) => 
+            dispatch(postCDFailed(error.message)));
+};
+
+export const postCDLoading = () => ({
+    type: ActionTypes.POST_CD_LOADING
+});
+
+export const postCDFailed = (errmess) => ({
+    type: ActionTypes.POST_CD_FAILED,
+    payload: errmess
+});
+
+export const postCDSucceeded = () => ({
+    type: ActionTypes.POST_CD_SUCCEEDED
+})

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Label, Col, Row, Card, CardTitle } from 'reactstrap';
-import { Control, Form } from 'react-redux-form';
+import { Control, Form, Errors } from 'react-redux-form';
 import MeritJumbotron from './MeritJumbtronComponent';
 import {connect} from 'react-redux';
 import { postTransfer, fetchAccountHolderData } from '../redux/ActionCreators';
@@ -19,7 +19,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 })
 
-
+const required = (val) => val != 0;
+const sufficientFunds = (val, amount) => amount <= val;
 
 class TransferPage extends Component {
     constructor(props){
@@ -32,10 +33,7 @@ class TransferPage extends Component {
     handleSubmit(values) {
         this.props.postTransfer(this.props.jwt, values.fromAccount, values.toAccount, values.transferAmount);
         console.log(values);
-       alert(`Transfer successful! \nYou transfered $${values.transferAmount} from account number\n${values.fromAccount} to account number ${values.toAccount}.`)
-    }
-
-    componentWillUnmount() {
+        alert(`Transfer successful! \nYou transfered $${values.transferAmount} from account number\n${values.fromAccount} to account number ${values.toAccount}.`)
         this.props.fetchAccountHolderData(this.props.jwt);
     }
 
@@ -52,7 +50,7 @@ class TransferPage extends Component {
                                 <Row className="form-group d-flex justify-content-center">
                                     <Label htmlFor="from-account" className="col-form-label offset-2" >Transfer From Account </Label>
                                     <Col md={10}>
-                                        <Control.select model=".fromAccount" id="fromAccount" className="form-control" name="fromAccount">
+                                        <Control.select model=".fromAccount" id="fromAccount" className="form-control" name="fromAccount" validators={{required}}>
                                             <option value='0'>Please Select Account</option>
                                             {this.props.accountHolder.personalCheckingAccounts?.map((account) =>
                                                     <option key={account.id} value={account.id}>Merit Checking Account #{account.id}: ${account.balance}</option>)}
@@ -63,12 +61,13 @@ class TransferPage extends Component {
                                             {this.props.accountHolder.iraAccounts?.map((account) =>
                                                     <option key={account.id} value={account.id}>IRA Account #{account.id}: ${account.balance}</option>)}
                                         </Control.select>
+                                        <Errors className="text-danger" model='.fromAccount' show="touched" messages={{required: 'Please select an account'}}/>
                                     </Col>
                                 </Row>
                                 <Row className="form-group d-flex justify-content-center">
                                     <Label htmlFor="to-account" className="col-form-label offset-2" >Transfer To Account </Label>
                                     <Col md={10}>
-                                        <Control.select model=".toAccount" id="toAccount" className="form-control" name="toAccount">
+                                        <Control.select model=".toAccount" id="toAccount" className="form-control" name="toAccount" validators={{required}}>
                                             <option value='0'>Please Select Account</option>
                                             {this.props.accountHolder.personalCheckingAccounts?.map((account) =>
                                                     <option key={account.id} value={account.id}>Merit Checking Account #{account.id}: ${account.balance}</option>)}
@@ -79,6 +78,8 @@ class TransferPage extends Component {
                                             {this.props.accountHolder.iraAccounts?.map((account) =>
                                                     <option key={account.id} value={account.id}>IRA Account #{account.id}: ${account.balance}</option>)}
                                         </Control.select>
+                                        <Errors className="text-danger" model='.toAccount' show="touched" messages={{required: 'Please select an account'}}/>
+
                                     </Col>
                                 </Row>
                                 <Row className="form-group d-flex justify-content-center">

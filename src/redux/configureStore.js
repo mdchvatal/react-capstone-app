@@ -10,6 +10,7 @@ import logger from 'redux-logger';
 import { InitialCredentials, InitialOpenCd, InitialTransfer } from './forms';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { TransferData } from './transferReducer';
+import { PostCDData } from './postCDReducer';
 
 
 
@@ -22,6 +23,7 @@ export const ConfigureStore = () => {
             accountHolderData: AccountHolderData,
             bankingSession: BankingSession,
             transferStatus: TransferData,
+            postCDData: PostCDData,
             ...createForms({
                 credentials: InitialCredentials,
                 transfer: InitialTransfer,
