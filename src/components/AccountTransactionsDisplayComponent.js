@@ -3,16 +3,29 @@ import { Table } from 'reactstrap';
 import { Fade, Stagger } from 'react-animation-components';
 
 function RenderTransaction({transaction}) {
-    return (
+    if (transaction.transactionType != "withdrawl") {
+        return (
+                <tr>
+                    <th scope="row">{transaction.id}</th>
+                    <td>{transaction.origin}</td>
+                    <td>{transaction.amount}</td>
+                    <td>{transaction.transactionType}</td>
+                    <td>{new Date(transaction.transactionDate).toLocaleString()}</td>
+                    <td></td>
+                </tr>
+        );
+    } else {
+        return (
             <tr>
                 <th scope="row">{transaction.id}</th>
                 <td>{transaction.origin}</td>
-                <td>{transaction.amount}</td>
+                <td>-{transaction.amount}</td>
                 <td>{transaction.transactionType}</td>
                 <td>{new Date(transaction.transactionDate).toLocaleString()}</td>
                 <td></td>
             </tr>
-    );   
+    );
+    }
 } 
 
 class AccountDisplay extends Component {

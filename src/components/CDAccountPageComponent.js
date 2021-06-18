@@ -33,7 +33,7 @@ class CDAccountPage extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
 
-    }
+    }class
 
     componentDidMount() {
         //causes infinite call loop
@@ -53,8 +53,8 @@ class CDAccountPage extends Component {
             return(
                 <div >
                 <MeritJumbotron/>
-                <div class="row justify-content-center">
-                    <div class="col-8">
+                <div className="row justify-content-center">
+                    <div className="col-8">
                         <Card className="card text-center">
                         <CardTitle><h2>Open A Certificate Of Deposit Account</h2></CardTitle>
                             <Form model="openCD" onSubmit={(values) => this.handleSubmit(values)}>
