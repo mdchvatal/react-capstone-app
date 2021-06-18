@@ -4,6 +4,7 @@ import { withRouter} from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 
 import { Loading } from './LoadingComponent';
+import MeritJumbotron from './MeritJumbtronComponent';
 
 function RenderCDOffering({cdOffering}) {
     return (
@@ -53,6 +54,8 @@ class AdminCDOfferings extends Component {
                 );
             } else {
                 return(
+                    <div>
+                    <MeritJumbotron/>
                     <div className="container">
                         <div className="row align-items-start">
                             <h1>CD Offerings</h1>
@@ -81,6 +84,7 @@ class AdminCDOfferings extends Component {
                                 </Stagger>
                             </div>
                         </div>
+                    </div>
                     </div>
                 );    
             }

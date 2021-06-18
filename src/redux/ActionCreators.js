@@ -250,6 +250,7 @@ export const postTransfer = (jwt, fromAccountId, toAccountId, transactionAmount)
         body: JSON.stringify(transferBody),
         headers: {
             "Authorization": `Bearer ${jwt}`,
+            "Content-Type": "application/json"
         },
 
     })

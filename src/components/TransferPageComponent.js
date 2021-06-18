@@ -3,18 +3,20 @@ import { Button, Label, Col, Row, Card, CardTitle } from 'reactstrap';
 import { Control, Form } from 'react-redux-form';
 import MeritJumbotron from './MeritJumbtronComponent';
 import {connect} from 'react-redux';
-import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolders, fetchAccountHolderData } from '../redux/ActionCreators';
+import { postTransfer, fetchAccountHolderData } from '../redux/ActionCreators';
 
 
 const mapStateToProps = (state) => {
 	return {
-		bankingSession: state.bankingSession,
+		jwt: state.bankingSession.token,
         accountHolder: state.accountHolderData.accountHolder
 	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchAccountHolderData: (jwt) => dispatch(fetchAccountHolderData(jwt))
+    fetchAccountHolderData: (jwt) => dispatch(fetchAccountHolderData(jwt)),
+    postTransfer: (jwt, fromAccountId, toAccountId, transactionAmount) => dispatch(postTransfer(jwt, fromAccountId, toAccountId, transactionAmount))
+
 })
 
 
@@ -28,8 +30,13 @@ class TransferPage extends Component {
     }
 
     handleSubmit(values) {
-        alert(JSON.stringify(values));
+        this.props.postTransfer(this.props.jwt, values.fromAccount, values.toAccount, values.transferAmount);
         console.log(values);
+       alert(`Transfer successful! \nYou transfered $${values.transferAmount} from account number\n${values.fromAccount} to account number ${values.toAccount}.`)
+    }
+
+    componentWillUnmount() {
+        this.props.fetchAccountHolderData(this.props.jwt);
     }
 
 
