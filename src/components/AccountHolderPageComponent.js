@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect, withRouter} from 'react-router-dom';
 import TransferButton from './TransferButtonComponent';
+import { postTransfer, fetchCDOfferings } from '../redux/ActionCreators';
 
 import {connect} from 'react-redux';
 import { Alert, Table, Card, CardBody, CardText, Container, CardTitle, CardSubtitle} from 'reactstrap';
@@ -11,6 +12,18 @@ import MeritJumbotron from './MeritJumbtronComponent';
 import DBACheckingAccounts from './DBACheckingAccountsComponent';
 import CDAccounts from './CDAccountsComponent';
 
+const mapStateToProps = (state) => {
+	return {
+		jwt: state.bankingSession.token,
+        accountHolder: state.accountHolderData.accountHolder,
+        cdOfferings: state.cdOfferings
+
+	}
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchCDOfferings: (bankingSession) => dispatch(fetchCDOfferings(bankingSession)),
+})
 
 function RenderAccount({account}) {
         return (
@@ -21,13 +34,17 @@ function RenderAccount({account}) {
                 </tr>
         );   
 } 
+
 //TODO: implement error handling
 class AccountHolderPage extends Component {
     constructor(props) {    
         super(props); 
     }
-        
     
+    componentWillUnmount() {
+       
+    }
+
     render () {
         if (this.props.accountHolderData.status === 'loading') {
             return(
@@ -70,4 +87,4 @@ class AccountHolderPage extends Component {
             }
 }
 
-export default AccountHolderPage;
+export default connect(mapStateToProps, mapDispatchToProps)(AccountHolderPage);

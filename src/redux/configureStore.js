@@ -7,7 +7,7 @@ import { AccountHolders } from './accountHolders';
 import { AccountHolderData } from './accountHolderDataReducer';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { InitialCredentials, InitialTransfer } from './forms';
+import { InitialCredentials, InitialOpenCd, InitialTransfer } from './forms';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { TransferData } from './transferReducer';
 
@@ -24,7 +24,8 @@ export const ConfigureStore = () => {
             transferStatus: TransferData,
             ...createForms({
                 credentials: InitialCredentials,
-                transfer: InitialTransfer
+                transfer: InitialTransfer,
+                openCD: InitialOpenCd,
             })
         }),
         composeWithDevTools(applyMiddleware(thunk, logger))

@@ -50,7 +50,7 @@ class TransferPage extends Component {
                         <CardTitle><h2>Transfer Money</h2></CardTitle>
                             <Form model="transfer" onSubmit={(values) => this.handleSubmit(values)}>
                                 <Row className="form-group d-flex justify-content-center">
-                                    <Label htmlFor="from-account" value="Please Select an Account" className="col-form-label offset-2" >Transfer From Account </Label>
+                                    <Label htmlFor="from-account" className="col-form-label offset-2" >Transfer From Account </Label>
                                     <Col md={10}>
                                         <Control.select model=".fromAccount" id="fromAccount" className="form-control" name="fromAccount">
                                             <option value='0'>Please Select Account</option>
@@ -68,7 +68,7 @@ class TransferPage extends Component {
                                 <Row className="form-group d-flex justify-content-center">
                                     <Label htmlFor="to-account" className="col-form-label offset-2" >Transfer To Account </Label>
                                     <Col md={10}>
-                                        <Control.select value="Please Select an Account" model=".toAccount" id="toAccount" className="form-control" name="toAccount">
+                                        <Control.select model=".toAccount" id="toAccount" className="form-control" name="toAccount">
                                             <option value='0'>Please Select Account</option>
                                             {this.props.accountHolder.personalCheckingAccounts?.map((account) =>
                                                     <option key={account.id} value={account.id}>Merit Checking Account #{account.id}: ${account.balance}</option>)}

@@ -8,3 +8,9 @@ export const InitialTransfer = {
     toAccount: '',
     transferAmount: ''
 }
+
+export const InitialOpenCd = {
+    offering: '0',
+    sourceAccount: '0',
+    transferAmount: '0'
+}

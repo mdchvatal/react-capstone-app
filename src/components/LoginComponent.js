@@ -27,6 +27,7 @@ class Login extends Component {
         }
         this.props.bankingSession.isStarting = true;
         this.props.resetLoginForm();
+        
     }
 
     render() {

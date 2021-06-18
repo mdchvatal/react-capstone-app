@@ -9,7 +9,7 @@ import Footer from './FooterComponent';
 import AdminHome from './AdminHomeComponent';
 import AdminUsers from './AdminUsersComponent';
 import TransferPage from './TransferPageComponent';
-import CDAccountsPage from './CDAccountsPageComponent';
+import CDAccountPage from './CDAccountPageComponent';
 import MeritSavingsPage from './MeritSavingsPageComponent';
 import MeritCheckingPage from './MeritCheckingPageComponent';
 import DBACheckingAccountPage from './DBACheckingAccountPageComponent'
@@ -89,7 +89,7 @@ class Main extends Component {
         
         return (
             <div>
-                <Header loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} fetchAccountHolderData={this.props.fetchAccountHolderData} accountHolderData={this.props.accountHolderData}/>
+                <Header loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} fetchAccountHolderData={this.props.fetchAccountHolderData} accountHolderData={this.props.accountHolderData} fetchCDOfferings={this.props.fetchCDOfferings} cdOfferings={this.props.cdOfferings}/>
                 <TransitionGroup>
                     <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
                         <Switch location={this.props.location}>
@@ -111,7 +111,7 @@ class Main extends Component {
                                                             bankingSession={this.props.bankingSession}/>}/>
                             <Route exact path='/account-holder/merit-checking' component={() => <MeritCheckingPage/>}/>
                             <Route exact path='/account-holder/dba-checking' component={() => <DBACheckingAccountPage/>}/> 
-                            <Route exact path='/account-holder/cd-account' component={() => <CDAccountsPage/>}/>    
+                            <Route exact path='/account-holder/cd-accounts' component={() => <CDAccountPage/>}/>   
                                                          
                             <Route exact path='/admin' component={AdminHome} />
                             <Route exact path='/admin/users' component={AdminUsersPage} />

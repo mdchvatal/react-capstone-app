@@ -117,6 +117,9 @@ class Header extends Component {
             } else {
                 if (this.props.accountHolderData.accountHolder === null) {
                     this.props.fetchAccountHolderData(this.props.bankingSession.token);
+                } 
+                if (this.props.cdOfferings.model[0] == null){
+                    this.props.fetchCDOfferings(this.props.bankingSession);
                 }
                 return(
                     <React.Fragment>
@@ -151,7 +154,7 @@ class Header extends Component {
                                             </DropdownMenu>
                                         </UncontrolledDropdown>
                                         <NavItem>
-                                            <NavLink className="nav-link" to="/cd-accounts">CD</NavLink>
+                                            <NavLink className="nav-link" to="/account-holder/cd-accounts">CD</NavLink>
                                         </NavItem>
                                     </Nav>
                                 </Collapse>
