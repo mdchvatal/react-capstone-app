@@ -44,7 +44,7 @@ class Login extends Component {
                 <React.Fragment>
                     <Form model="credentials" onSubmit={(values) => this.handleSubmit(values)}>
                         <Row className="form-group">
-                            <Label htmlFor="username" className="col-form-label">First Name</Label>
+                            <Label htmlFor="username" className="col-form-label">Username</Label>
                             <Col md={10}>
                                 <Control.text model=".username" id="username" name="username"
                                     placeholder="Username"
@@ -66,7 +66,7 @@ class Login extends Component {
                             </Col>
                         </Row>
                         <Row className="form-group">
-                            <Label htmlFor="password" className="col-form-label">Last Name</Label>
+                            <Label htmlFor="password" className="col-form-label">Password</Label>
                             <Col md={10}>
                                 <Control type="password" model=".password" id="password" name="password"
                                     placeholder="Password"
