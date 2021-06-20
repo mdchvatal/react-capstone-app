@@ -3,15 +3,14 @@ import { Control, Errors, LocalForm } from 'react-redux-form';
 import { Alert, Button, Label, Table, Row, Col, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { withRouter} from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
-
 import { Loading } from './LoadingComponent';
 
-function RenderUser({user}) {
+function RenderUser({user, bankingSession, deleteUser}) {
     return (
         <tr>
             <th scope="row">{user.id}</th>
             <td><Button color="link"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></Button></td>
-            <td><DeleteForm userId={user.id} /> </td>
+            <td><DeleteForm userId={user.id} bankingSession={bankingSession} deleteUser={deleteUser} /></td>
             <td>{user.username}</td>
             <td>{user.role}</td>
         </tr>
@@ -36,9 +35,9 @@ class DeleteForm extends Component {
         });
     }
 
-    handleSubmit(values) {
+    handleSubmit() {
         this.toggleModal();
-        //this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);        
+        this.props.deleteUser(this.props.bankingSession, this.props.userId);
     }
 
     render() {
@@ -46,26 +45,26 @@ class DeleteForm extends Component {
             <span>
                 <Button color="link" onClick={this.toggleModal}><i class="fa fa-trash-o" aria-hidden="true"></i></Button>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal} >
-              <ModalHeader toggle={this.toggleModal}>Delete User</ModalHeader>
-                <ModalBody>
-                    <LocalForm onSubmit={(values) => this.handleSubmit(values)}>                    
-                        <Row className="form-group">
-                            <Label md={12}>Do you really want to delete the user?</Label>
-                        </Row>
-                        
-                        <Row className="form-group">
-                            <Col md={{size: 4, offset: 2}}>
-                                <Button color="secondary">
-                                    Cancel
-                                </Button>
-                            </Col>
-                            <Col md={{size: 4, offset: 2}}>
-                                <Button type="submit" color="danger">
-                                    Delete
-                                </Button>
-                            </Col>
-                        </Row>
-                     </LocalForm>
+                    <ModalHeader toggle={this.toggleModal}>Delete User</ModalHeader>
+                    <ModalBody>
+                        <LocalForm onSubmit={() => this.handleSubmit()}>                    
+                            <Row className="form-group">
+                                <Label md={12}>Do you really want to delete the user?</Label>
+                            </Row>
+                            
+                            <Row className="form-group">
+                                <Col md={{size: 4, offset: 2}}>
+                                    <Button color="secondary" onClick={this.toggleModal}>
+                                        Cancel
+                                    </Button>
+                                </Col>
+                                <Col md={{size: 4, offset: 2}}>
+                                    <Button type="submit" color="danger">
+                                        Delete
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </LocalForm>
                     </ModalBody>
                 </Modal>                
             </span>
@@ -76,12 +75,23 @@ class DeleteForm extends Component {
 class AdminUsers extends Component {
     constructor(props) {    
         super(props); 
+
+        this.mapUser = this.mapUser.bind(this);        
     }
 
     componentDidMount() {
         if (this.props.status === 'idle') {
             this.props.fetchUsers(this.props.bankingSession);
+        } else if (this.props.user && this.props.user.status === 'succeeded') {
+            this.props.clearUser();
+            this.props.fetchUsers(this.props.bankingSession);
         }
+    }
+
+    mapUser(user) {
+        return (
+            <RenderUser user={user} bankingSession={this.props.bankingSession} deleteUser={this.props.deleteUser} />
+        );
     }
     
     render() {
@@ -127,11 +137,7 @@ class AdminUsers extends Component {
                                             </thead>
                                             <tbody>
                                                 {
-                                                    this.props.users.map((user) => {
-                                                        return (
-                                                            <RenderUser user={user} />
-                                                        );
-                                                    })
+                                                    this.props.users.map(this.mapUser)
                                                 }
                                             </tbody>
                                         </Table>
