@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolders, fetchAccountHolderData } from '../redux/ActionCreators';
+import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolders, fetchAccountHolderData, deleteUser, clearUser } from '../redux/ActionCreators';
 
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
@@ -13,7 +13,6 @@ import AdminCDOfferings from './AdminCDOfferingsComponent';
 import AccountHolderPage from './AccountHolderPageComponent';
 import AdminAccountHolders from './AdminAccountHoldersComponent';
 
-
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -21,6 +20,7 @@ const mapStateToProps = (state) => {
 	return {
 		bankingSession: state.bankingSession,
         users: state.users,
+        user: state.user,
         cdOfferings: state.cdOfferings,
         accountHolders: state.accountHolders,
         accountHolderData: state.accountHolderData
@@ -32,6 +32,8 @@ const mapDispatchToProps = (dispatch) => ({
     logoutUser: () => dispatch(logoutUser()),
     resetLoginForm: () => { dispatch(actions.reset('credentials'))},
     fetchUsers: (bankingSession) => dispatch(fetchUsers(bankingSession)),
+    deleteUser: (bankingSession, userId) => dispatch(deleteUser(bankingSession, userId)),
+    clearUser: () => dispatch(clearUser()),
     fetchCDOfferings: (bankingSession) => dispatch(fetchCDOfferings(bankingSession)),
     fetchAccountHolders: (bankingSession) => dispatch(fetchAccountHolders(bankingSession)),
     fetchAccountHolderData: (jwt) => dispatch(fetchAccountHolderData(jwt))
@@ -55,7 +57,10 @@ class Main extends Component {
                 <AdminUsers 
                     bankingSession={this.props.bankingSession}
                     fetchUsers={this.props.fetchUsers}
+                    deleteUser={this.props.deleteUser}
+                    clearUser={this.props.clearUser}
                     users={this.props.users.model}
+                    user={this.props.user}
                     status={this.props.users.status}
                     errorMessage={this.props.users.errorMessage}
                 />
