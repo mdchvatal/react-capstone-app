@@ -9,6 +9,8 @@ function RenderUser({user}) {
     return (
         <tr>
             <th scope="row">{user.id}</th>
+            <td><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
+            <td><i class="fa fa-trash-o" aria-hidden="true"></i></td>
             <td>{user.username}</td>
             <td>{user.role}</td>
         </tr>
@@ -53,6 +55,7 @@ class AdminUsers extends Component {
                     <div className="container">
                         <div className="row align-items-start">
                             <h1>Users</h1>
+                            <h5 className="list-actions"><i class="fa fa-plus" aria-hidden="true"></i>Add New</h5>
                             <div className="col-12 col-md m-1">
                                 <Stagger in>
                                     <Fade in>
@@ -60,6 +63,8 @@ class AdminUsers extends Component {
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
+                                                    <th>Edit</th>
+                                                    <th>Delete</th>
                                                     <th>Username</th>
                                                     <th>Role</th>
                                                 </tr>

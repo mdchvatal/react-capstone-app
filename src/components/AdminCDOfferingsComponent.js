@@ -9,6 +9,8 @@ function RenderCDOffering({cdOffering}) {
     return (
         <tr>
             <th scope="row">{cdOffering.id}</th>
+            <td><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
+            <td><i class="fa fa-trash-o" aria-hidden="true"></i></td>
             <td>{cdOffering.term}</td>
             <td>{cdOffering.interestRate}</td>
         </tr>
@@ -56,6 +58,7 @@ class AdminCDOfferings extends Component {
                     <div className="container">
                         <div className="row align-items-start">
                             <h1>CD Offerings</h1>
+                            <h5 className="list-actions"><i class="fa fa-plus" aria-hidden="true"></i>Add New</h5>
                             <div className="col-12 col-md m-1">
                                 <Stagger in>
                                     <Fade in>
@@ -63,6 +66,8 @@ class AdminCDOfferings extends Component {
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
+                                                    <th>Edit</th>
+                                                    <th>Delete</th>
                                                     <th>Term</th>
                                                     <th>Interest Rate</th>
                                                 </tr>
