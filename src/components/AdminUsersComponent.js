@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, Table } from 'reactstrap';
+import { Control, Errors, LocalForm } from 'react-redux-form';
+import { Alert, Button, Label, Table, Row, Col, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { withRouter} from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 
@@ -9,12 +10,67 @@ function RenderUser({user}) {
     return (
         <tr>
             <th scope="row">{user.id}</th>
-            <td><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
-            <td><i class="fa fa-trash-o" aria-hidden="true"></i></td>
+            <td><Button color="link"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></Button></td>
+            <td><DeleteForm userId={user.id} /> </td>
             <td>{user.username}</td>
             <td>{user.role}</td>
         </tr>
     );
+}
+
+class DeleteForm extends Component {
+    constructor(props) {
+        super(props);
+
+        this.toggleModal = this.toggleModal.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.state = {
+            isModalOpen: false
+        };
+    }
+
+    toggleModal(){
+        this.setState({
+            isModalOpen : !this.state.isModalOpen
+        });
+    }
+
+    handleSubmit(values) {
+        this.toggleModal();
+        //this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);        
+    }
+
+    render() {
+        return(
+            <span>
+                <Button color="link" onClick={this.toggleModal}><i class="fa fa-trash-o" aria-hidden="true"></i></Button>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal} >
+              <ModalHeader toggle={this.toggleModal}>Delete User</ModalHeader>
+                <ModalBody>
+                    <LocalForm onSubmit={(values) => this.handleSubmit(values)}>                    
+                        <Row className="form-group">
+                            <Label md={12}>Do you really want to delete the user?</Label>
+                        </Row>
+                        
+                        <Row className="form-group">
+                            <Col md={{size: 4, offset: 2}}>
+                                <Button color="secondary">
+                                    Cancel
+                                </Button>
+                            </Col>
+                            <Col md={{size: 4, offset: 2}}>
+                                <Button type="submit" color="danger">
+                                    Delete
+                                </Button>
+                            </Col>
+                        </Row>
+                     </LocalForm>
+                    </ModalBody>
+                </Modal>                
+            </span>
+        );
+    }
 }
 
 class AdminUsers extends Component {
@@ -88,7 +144,6 @@ class AdminUsers extends Component {
             }
         }
     }
-
 }
 
 export default withRouter(AdminUsers);
