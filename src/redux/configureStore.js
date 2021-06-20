@@ -2,6 +2,7 @@ import {createStore, combineReducers, applyMiddleware } from 'redux';
 import { createForms } from 'react-redux-form';
 import { BankingSession } from './bankingSession';
 import { Users } from './users';
+import { User } from './user';
 import { CDOfferings } from './cdOfferings';
 import { AccountHolders } from './accountHolders';
 import { AccountHolderData } from './accountHolderDataReducer';
@@ -16,6 +17,7 @@ export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
             users: Users,
+            user: User,
             cdOfferings: CDOfferings,
             accountHolders: AccountHolders, 
             accountHolderData: AccountHolderData,
