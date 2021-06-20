@@ -17,7 +17,6 @@ export const loginUser = (username, password) => (dispatch) => {
     
        credentials: 'same-origin'
     })
-
     .then(response => {
         if (response.ok) {
             return response;
@@ -97,6 +96,52 @@ export const usersSucceeded = (data) => ({
 
 export const usersFailed = (errorMessage) => ({
     type: ActionTypes.USERS_GET_FAILED,
+    payload: errorMessage
+});
+
+export const clearUser = () => ({
+    type: ActionTypes.USER_CLEAR,
+    payload: null
+});
+
+export const deleteUser = (bankingSession, userId) => (dispatch) => {
+    if (bankingSession && bankingSession.token) {
+        console.log('Deleting user...');    
+        return fetch(baseUrl + 'users/' + userId, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${bankingSession.token}`,
+                "Content-Type": "application/json"
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                let error = new Error('Error ' + response.status + '. Unable to delete user.')
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+                throw error;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(userDeleteSucceeded(response)))
+        .catch(error => dispatch(userDeleteFailed(error.message)));
+    } else {
+        userDeleteFailed('Please sign in first.');
+    }
+};
+
+export const userDeleteSucceeded = (data) => ({
+    type: ActionTypes.USER_DELETE_SUCCEEDED,
+    payload: data
+});
+
+export const userDeleteFailed = (errorMessage) => ({
+    type: ActionTypes.USER_DELETE_FAILED,
     payload: errorMessage
 });
 
