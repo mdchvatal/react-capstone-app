@@ -4,6 +4,7 @@ import MeritJumbotron from './MeritJumbtronComponent';
 import AccountDisplay from './AccountTransactionsDisplayComponent';
 import { Link, Redirect, withRouter} from 'react-router-dom';
 import TransferButton from './TransferButtonComponent';
+import CurrencyFormat from 'react-currency-format';
 
 
 class MeritSavingsPage extends Component {
@@ -41,7 +42,7 @@ class MeritSavingsPage extends Component {
                                     return (
                                         <div>
                                             <h1>Merit Savings Account #{account.id}</h1>
-                                            <h2>Account Balance: ${account.balance}</h2>
+                                            <h2>Account Balance: <CurrencyFormat value={`${account.balance}`} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
                                             <AccountDisplay account={account} accountHolderData={this.props.accountHolderData}/>
                                         </div>
                                     );

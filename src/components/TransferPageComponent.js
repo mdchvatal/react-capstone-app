@@ -4,6 +4,7 @@ import { Control, Form, Errors } from 'react-redux-form';
 import MeritJumbotron from './MeritJumbtronComponent';
 import {connect} from 'react-redux';
 import { postTransfer, fetchAccountHolderData } from '../redux/ActionCreators';
+import CurrencyFormat from 'react-currency-format';
 
 
 const mapStateToProps = (state) => {

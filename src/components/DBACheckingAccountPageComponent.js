@@ -6,6 +6,8 @@ import { Link, Redirect, withRouter} from 'react-router-dom';
 import TransferButton from './TransferButtonComponent';
 import {connect} from 'react-redux';
 import { fetchAccountHolders, fetchAccountHolderData } from '../redux/ActionCreators';
+import CurrencyFormat from 'react-currency-format';
+
 
 
 const mapStateToProps = (state) => {
@@ -58,7 +60,7 @@ class DBACheckingPage extends Component {
                                     return (
                                         <div>
                                             <h1>DBA Checking Account #{account.id}</h1>
-                                            <h2>Account Balance: {account.balance}</h2>
+                                            <h2>Account Balance: ${account.balance}</h2>
                                             <AccountDisplay account={account} accountHolderData={this.props.accountHolderData}/>
                                         </div>
                                     );

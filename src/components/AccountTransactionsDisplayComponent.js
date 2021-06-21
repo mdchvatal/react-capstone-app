@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import { Fade, Stagger } from 'react-animation-components';
+import CurrencyFormat from 'react-currency-format';
+
 
 function RenderTransaction({transaction}) {
     if (transaction.transactionType != "withdrawl") {
@@ -8,7 +10,7 @@ function RenderTransaction({transaction}) {
                 <tr>
                     <th scope="row">{transaction.id}</th>
                     <td>{transaction.origin}</td>
-                    <td>{transaction.amount}</td>
+                    <td><CurrencyFormat value={`${transaction.amount}`} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
                     <td>{transaction.transactionType}</td>
                     <td>{new Date(transaction.transactionDate).toLocaleString()}</td>
                     <td></td>
@@ -19,7 +21,7 @@ function RenderTransaction({transaction}) {
             <tr>
                 <th scope="row">{transaction.id}</th>
                 <td>{transaction.origin}</td>
-                <td>-{transaction.amount}</td>
+                <td><CurrencyFormat value={`-${transaction.amount}`} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
                 <td>{transaction.transactionType}</td>
                 <td>{new Date(transaction.transactionDate).toLocaleString()}</td>
                 <td></td>

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import { Fade, Stagger } from 'react-animation-components';
+import CurrencyFormat from 'react-currency-format';
+
 
 function RenderAccount({account}) {
     return (
             <tr>
                 <th scope="row">{account.id}</th>
-                <td>{account.balance}</td>
+                <td><CurrencyFormat value={`${account.balance}`} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
                 <td>{account.interestRate}</td>
             </tr>
     );   

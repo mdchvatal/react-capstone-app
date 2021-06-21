@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect, withRouter} from 'react-router-dom';
 import TransferButton from './TransferButtonComponent';
 import { postTransfer, fetchCDOfferings } from '../redux/ActionCreators';
-
+import CurrencyFormat from 'react-currency-format';
 import {connect} from 'react-redux';
 import { Alert, Table, Card, CardBody, CardText, Container, CardTitle, CardSubtitle} from 'reactstrap';
 import SavingsAccounts from './MeritSavingsAccountsComponent';
@@ -69,7 +69,7 @@ class AccountHolderPage extends Component {
                     <MeritJumbotron/>
                     <Card className="text-center">
                         <h1>{this.props.accountHolderData.accountHolder.firstName} {this.props.accountHolderData.accountHolder.lastName}</h1>
-                        <h2>Combined Balance: {this.props.accountHolderData.accountHolder.combinedBalance}</h2>
+                        <h2><CurrencyFormat value={`Combined Balance: ${this.props.accountHolderData.accountHolder.combinedBalance}`} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
                         <SavingsAccounts accountHolderData={this.props.accountHolderData}/>
                         <MeritCheckingAccounts accountHolderData={this.props.accountHolderData}/>
                         <DBACheckingAccounts accountHolderData={this.props.accountHolderData}/>

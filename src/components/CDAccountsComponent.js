@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Table } from 'reactstrap';
 import { withRouter} from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
-
+import CurrencyFormat from 'react-currency-format';
 import { Loading } from './LoadingComponent';
 import MeritJumbotron from './MeritJumbtronComponent';
 
@@ -10,7 +10,7 @@ function RenderAccount({account}) {
     return (
             <tr>
                 <th scope="row">{account.id}</th>
-                <td>{account.balance}</td>
+                <td><CurrencyFormat value={`Combined Balance: ${account.balance}`} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
                 <td>{account.interestRate}</td>
                 <td>{new Date(account.openedOn).toLocaleString()}</td>
             </tr>
