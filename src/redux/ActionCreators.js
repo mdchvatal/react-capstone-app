@@ -105,6 +105,8 @@ export const clearUser = () => ({
 });
 
 export const deleteUser = (bankingSession, userId) => (dispatch) => {
+    dispatch(userDeleting);
+
     if (bankingSession && bankingSession.token) {
         console.log('Deleting user...');    
         return fetch(baseUrl + 'users/' + userId, {
@@ -134,6 +136,10 @@ export const deleteUser = (bankingSession, userId) => (dispatch) => {
         userDeleteFailed('Please sign in first.');
     }
 };
+
+export const userDeleting = () => ({
+    type: ActionTypes.USER_DELETING
+});
 
 export const userDeleteSucceeded = (data) => ({
     type: ActionTypes.USER_DELETE_SUCCEEDED,
@@ -188,6 +194,59 @@ export const cdOfferingsSucceeded = (data) => ({
 
 export const cdOfferingsFailed = (errorMessage) => ({
     type: ActionTypes.CDOFFERINGS_GET_FAILED,
+    payload: errorMessage
+});
+
+export const clearCDOffering = () => ({
+    type: ActionTypes.CDOFFERING_CLEAR,
+    payload: null
+});
+
+export const editCDOffering = (bankingSession, cdOffering) => (dispatch) => {
+    dispatch(cdOfferingEditing);
+
+    if (bankingSession && bankingSession.token) {
+        console.log('Editing CD Offering...');    
+        return fetch(baseUrl + 'cd-offerings/' + cdOffering.id, {
+            method: "PUT",
+            body: JSON.stringify(cdOffering),
+            headers: {
+                "Authorization": `Bearer ${bankingSession.token}`,
+                "Content-Type": "application/json"
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                let error = new Error('Error ' + response.status + '. Unable to edit CD offering.');
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            throw error;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(cdOfferingEditSucceeded(response)))
+        .catch(error => dispatch(cdOfferingEditFailed(error.message)));
+    } else {
+        userDeleteFailed('Please sign in first.');
+    }
+};
+
+export const cdOfferingEditing = () => ({
+    type: ActionTypes.CDOFFERING_EDITING
+});
+
+export const cdOfferingEditSucceeded = (data) => ({
+    type: ActionTypes.CDOFFERING_EDIT_SUCCEEDED,
+    payload: data
+});
+
+export const cdOfferingEditFailed = (errorMessage) => ({
+    type: ActionTypes.CDOFFERING_EDIT_FAILED,
     payload: errorMessage
 });
 

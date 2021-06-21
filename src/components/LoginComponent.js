@@ -25,14 +25,12 @@ class Login extends Component {
         this.props.loginUser(values.username, values.password);
         this.props.resetLoginForm();
         this.setState({submit: true});
-        //this.props.fetchAccountHolderData(this.props.bankingSession.token);
-        
     }
 
     render() {
         if (this.bankingSession != null && this.bankingSession.role === 'ADMIN') {
             return (
-                <Redirect to="/admin"/>
+                <Redirect to="/admin/home"/>
             )
         } else if (this.bankingSession != null && this.bankingSession.role === 'USER') {
             return (
