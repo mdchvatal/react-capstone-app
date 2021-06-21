@@ -10,7 +10,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { TransferData } from './transferReducer';
 import { PostCDData } from './postCDReducer';
-import { InitialCredentials, DefaultCDOffering, InitialTransfer } from './forms';
+import { InitialCredentials, DefaultCDOffering, InitialTransfer, InitialOpenCd } from './forms';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { CDOffering } from './cdOffering';
 
@@ -32,6 +32,7 @@ export const ConfigureStore = () => {
                 credentials: InitialCredentials,
                 currentCDOffering: DefaultCDOffering,
                 transfer: InitialTransfer,
+                openCD: InitialOpenCd,
             })
         }),
         composeWithDevTools(applyMiddleware(thunk, logger))

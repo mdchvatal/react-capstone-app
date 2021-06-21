@@ -7,8 +7,6 @@ import AccountDisplay from './AccountTransactionsDisplayComponent';
 import MeritJumbotron from './MeritJumbtronComponent';
 import {connect} from 'react-redux';
 import { postTransfer, fetchAccountHolderData, fetchCDOfferings, postCDAccount } from '../redux/ActionCreators';
-import CurrencyFormat from 'react-currency-format';
-
 
 
 const mapStateToProps = (state) => {
@@ -44,7 +42,7 @@ class CDAccountPage extends Component {
     handleSubmit(values) {
         this.props.postCDAccount(this.props.jwt, values.sourceAccount, values.offering, values.transferAmount);
         console.log(values);
-        alert(`You have successfully created a new Certificate of Deposit Account with a balance of ${values.transferAmount}`);
+        alert(`You have successfully created a new Certificate of Deposit Account with a balance of $${values.transferAmount}`);
         this.props.fetchAccountHolderData(this.props.jwt);
     }
 
@@ -114,7 +112,7 @@ class CDAccountPage extends Component {
                             return (
                                 <div>
                                     <h1>Certificate of Deposit Account #{account.id}</h1>
-                                    <h2>Account Balance: ${account.balance}</h2>
+                                    <h2>Account Balance: {account.balance}</h2>
                                     <AccountDisplay account={account} accountHolderData={this.props.accountHolderData}/>
                                 </div>
                             );
