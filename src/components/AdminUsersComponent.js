@@ -4,6 +4,7 @@ import { Alert, Button, Label, Table, Row, Col, Modal, ModalHeader, ModalBody } 
 import { withRouter} from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 import { Loading } from './LoadingComponent';
+import MeritJumbotron from './MeritJumbtronComponent';
 
 function RenderUser({user, bankingSession, deleteUser}) {
     return (
@@ -118,6 +119,8 @@ class AdminUsers extends Component {
                 );
             } else {
                 return(
+                    <div>
+                    <MeritJumbotron/>
                     <div className="container">
                         <div className="row align-items-start">
                             <h1>Users</h1>
@@ -145,6 +148,7 @@ class AdminUsers extends Component {
                                 </Stagger>
                             </div>
                         </div>
+                    </div>
                     </div>
                 );    
             }

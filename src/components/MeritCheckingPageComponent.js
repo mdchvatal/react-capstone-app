@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
-import { Alert, Button, Card} from 'reactstrap';
+import { Alert,  Card} from 'reactstrap';
 import MeritJumbotron from './MeritJumbtronComponent';
 import AccountDisplay from './AccountTransactionsDisplayComponent';
 import { Link, Redirect, withRouter} from 'react-router-dom';
 import TransferButton from './TransferButtonComponent';
+import {connect} from 'react-redux';
+import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolders, fetchAccountHolderData } from '../redux/ActionCreators';
 
 
-class MeritSavingsPage extends Component {
+const mapStateToProps = (state) => {
+	return {
+		bankingSession: state.bankingSession,
+        users: state.users,
+        cdOfferings: state.cdOfferings,
+        accountHolders: state.accountHolders,
+        accountHolderData: state.accountHolderData
+	}
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchAccountHolders: (bankingSession) => dispatch(fetchAccountHolders(bankingSession)),
+    fetchAccountHolderData: (jwt) => dispatch(fetchAccountHolderData(jwt))
+})
+
+class MeritCheckingPage extends Component {
     constructor(props) {    
         super(props);
     }
@@ -15,7 +32,7 @@ class MeritSavingsPage extends Component {
         
 
     render () {
-        if (this.props.accountHolderData.accountHolder.savingsAccounts[0] === null) {
+        if (this.props.accountHolderData.accountHolder.personalCheckingAccounts[0] === null) {
             return(
                 <Redirect to="/account-holder"/>
             )
@@ -37,11 +54,11 @@ class MeritSavingsPage extends Component {
                         <MeritJumbotron/>
                         <Card className="text-center">
                             {
-                                this.props.accountHolderData.accountHolder.savingsAccounts.map((account) => {
+                                this.props.accountHolderData.accountHolder.personalCheckingAccounts.map((account) => {
                                     return (
                                         <div>
-                                            <h1>Merit Savings Account #{account.id}</h1>
-                                            <h2>Account Balance: ${account.balance}</h2>
+                                            <h1>Merit Checking Account #{account.id}</h1>
+                                            <h2>Account Balance: {account.balance}</h2>
                                             <AccountDisplay account={account} accountHolderData={this.props.accountHolderData}/>
                                         </div>
                                     );
@@ -51,6 +68,7 @@ class MeritSavingsPage extends Component {
                                 <div className="col-2" id="transfer"><Link to='/account-holder/transfer'><TransferButton/></Link></div>
                             </div>
                         </Card>
+                        
                     </div>
 
                 )
@@ -59,4 +77,4 @@ class MeritSavingsPage extends Component {
     }
 }
 
-export default withRouter(MeritSavingsPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MeritCheckingPage));

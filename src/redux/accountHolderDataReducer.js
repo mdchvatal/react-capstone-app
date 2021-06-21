@@ -7,7 +7,7 @@ export const AccountHolderData = (state = {
     }, action) => {
     switch (action.type) {
         case ActionTypes.ADD_AHDATA:
-            return {...state, accountHolder: action.payload, errorMessage: null, staus: 'succeeded'};
+            return {...state, accountHolder: action.payload, errorMessage: null, status: 'succeeded'};
 
         case ActionTypes.AHDATA_FAILED:
             return {...state, accountHolder: null, errorMessage: action.payload, status: 'failed'};

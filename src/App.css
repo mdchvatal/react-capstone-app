@@ -9,7 +9,7 @@
   text-align: left !important;
   background-size: cover;
   width: 1;
-  background-image:"url(assets/images/merit_skyline.jpg)";
+  
   color:black !important;
 
 }
@@ -23,6 +23,19 @@
   color: white;
 }
 
+.footer{
+  margin-top: 15px;
+}
+
+#transferSubmit{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#transfer{
+  margin-bottom: 15px;
+
+}
 .form-group {
   margin: 0;
   display: flex;

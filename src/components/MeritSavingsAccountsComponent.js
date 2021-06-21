@@ -4,6 +4,7 @@ import { withRouter} from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 
 import { Loading } from './LoadingComponent';
+import MeritJumbotron from './MeritJumbtronComponent';
 
 function RenderAccount({account}) {
     return (
@@ -15,35 +16,20 @@ function RenderAccount({account}) {
     );   
 } 
 
-class SavingsAccountPage extends Component {
+class SavingsAccounts extends Component {
 constructor(props) {    
     super(props); 
 }
 
 render() {
-    if (this.props.accountHolderData.isLoading == true) {
+    if (this.props.accountHolderData.accountHolder.savingsAccounts[0] == null) {
         return(
-            <div className="container">
-                <div className="row align-items-start">
-                    <h1></h1>
-                    <Loading />
-                </div>
+            <div>
             </div>
         )
     } else {
-        if (this.props.errorMessage) {
-            return(
-                <div className="container">
-                    <div className="row align-items-start">
-                        <h1></h1>
-                        <Alert color="danger">
-                            {this.props.errorMessage}
-                        </Alert>
-                    </div>
-                </div>
-            );
-        } else {
-            return(
+        return(
+            <div>
                 <div className="container">
                     <div className="row align-items-start">
                         <div className="col-12 col-md m-1">
@@ -72,10 +58,11 @@ render() {
                         </div>
                     </div>
                 </div>
-            );    
-        }
+            </div>
+        );    
     }
+    
 }
 }
 
-export default SavingsAccountPage;
+export default SavingsAccounts;

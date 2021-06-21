@@ -5,6 +5,7 @@ import { Fade, Stagger } from 'react-animation-components';
 import CurrencyFormat from 'react-currency-format';
 
 import { Loading } from './LoadingComponent';
+import MeritJumbotron from './MeritJumbtronComponent';
 
 function RenderAccountHolder({accountHolder}) {
     return (
@@ -57,6 +58,8 @@ class AdminAccountHolders extends Component {
                 );
             } else {
                 return(
+                    <div>
+                    <MeritJumbotron/>
                     <div className="container">
                         <div className="row align-items-start">
                             <h1>Account Holders</h1>
@@ -90,6 +93,7 @@ class AdminAccountHolders extends Component {
                                 </Stagger>
                             </div>
                         </div>
+                    </div>
                     </div>
                 );    
             }

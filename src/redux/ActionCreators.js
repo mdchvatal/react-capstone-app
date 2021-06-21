@@ -42,7 +42,7 @@ export const loginUser = (username, password) => (dispatch) => {
 export const loginSucceeded = (data) => ({
     type: ActionTypes.USER_LOGIN_SUCCEEDED,
     payload: data
-});
+})
 
 export const loginFailed = (errorMessage) => ({
     type: ActionTypes.USER_LOGIN_FAILED,
@@ -339,3 +339,101 @@ export const addAccoutHolderData = (accHolderData) => ({
     type: ActionTypes.ADD_AHDATA,
     payload: accHolderData
 });
+
+export const postTransfer = (jwt, fromAccountId, toAccountId, transactionAmount) => (dispatch) => {
+    const transferBody = {
+        amount: transactionAmount,
+        origin: 'Transfer',
+        transactionType: 'transfer',
+        
+    };
+    dispatch(transferLoading);
+    
+    return fetch(baseUrl + 'me/' + fromAccountId + '/' + toAccountId + '/add-transfer', {
+        method: "POST",
+        body: JSON.stringify(transferBody),
+        headers: {
+            "Authorization": `Bearer ${jwt}`,
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('That\'s a ' + response.status + '. That means there was a problem.')
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch((error) => 
+            dispatch(transferFailed(error.message)));
+};
+
+export const transferLoading = () => ({
+    type: ActionTypes.POST_TRANSFER_LOADING
+});
+
+export const transferFailed = (errmess) => ({
+    type: ActionTypes.POST_TRANSFER_FAILED,
+    payload: errmess
+});
+
+export const transferSucceeded = () => ({
+    type: ActionTypes.POST_TRANSFER_SUCCEEDED
+})
+
+export const postCDAccount = (jwt, fromAccountId, cdOfferingId, transactionAmount) => (dispatch) => {
+    const transferBody = {
+        amount: transactionAmount,
+        
+    };
+    dispatch(postCDLoading);
+    
+    return fetch(baseUrl + 'me/' + fromAccountId + '/' + cdOfferingId + '/add-cd-account', {
+        method: "POST",
+        body: transactionAmount,
+        headers: {
+            "Authorization": `Bearer ${jwt}`,
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('That\'s a ' + response.status + '. That means there was a problem.')
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch((error) => 
+            dispatch(postCDFailed(error.message)));
+};
+
+export const postCDLoading = () => ({
+    type: ActionTypes.POST_CD_LOADING
+});
+
+export const postCDFailed = (errmess) => ({
+    type: ActionTypes.POST_CD_FAILED,
+    payload: errmess
+});
+
+export const postCDSucceeded = () => ({
+    type: ActionTypes.POST_CD_SUCCEEDED
+})

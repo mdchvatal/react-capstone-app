@@ -12,13 +12,18 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import AdminHome from './AdminHomeComponent';
 import AdminUsers from './AdminUsersComponent';
+import TransferPage from './TransferPageComponent';
+import CDAccountPage from './CDAccountPageComponent';
 import MeritSavingsPage from './MeritSavingsPageComponent';
+import MeritCheckingPage from './MeritCheckingPageComponent';
+import DBACheckingAccountPage from './DBACheckingAccountPageComponent'
 import AdminCDOfferings from './AdminCDOfferingsComponent';
 import AccountHolderPage from './AccountHolderPageComponent';
 import AdminAccountHolders from './AdminAccountHoldersComponent';
 
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 
 const mapStateToProps = (state) => {
 	return {
@@ -51,9 +56,7 @@ class Main extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        // Load any data here.
-    }
+  
 
     render() {
         console.log('Main Component Props on render:');
@@ -101,19 +104,20 @@ class Main extends Component {
         
         return (
             <div>
-                <Header loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} fetchAccountHolderData={this.props.fetchAccountHolderData} accountHolderData={this.props.accountHolderData}/>
+                <Header loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession} fetchAccountHolderData={this.props.fetchAccountHolderData} accountHolderData={this.props.accountHolderData} fetchCDOfferings={this.props.fetchCDOfferings} cdOfferings={this.props.cdOfferings}/>
                 <TransitionGroup>
                     <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
                         <Switch location={this.props.location}>
                             <Route path='/home' component={() => <Home loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} 
                                 resetLoginForm={this.props.resetLoginForm} bankingSession={this.props.bankingSession}
-                                fetchAccountHolderData={this.props.fetchAccountHolderData}/>} />
+                                fetchAccountHolderData={this.props.fetchAccountHolderData} accountHolderData={this.props.accountHolderData}/>} />
                             <Route exact path='/account-holder' component={() =>  <AccountHolderPage
                                                             status={this.props.accountHolderData.status}
                                                             errorMessage={this.props.accountHolderData.errorMessage}
                                                             accountHolderData={this.props.accountHolderData} 
                                                             fetchAccountHolderData={this.props.fetchAccountHolderData} 
                                                             bankingSession={this.props.bankingSession}/>}/>
+                            <Route exact path='/account-holder/transfer' component={() => <TransferPage/>}/>                               
                             <Route exact path='/account-holder/merit-savings' component={() =>  <MeritSavingsPage
                                                             status={this.props.accountHolderData.status}
                                                             errorMessage={this.props.accountHolderData.errorMessage}
@@ -121,6 +125,9 @@ class Main extends Component {
                                                             fetchAccountHolderData={this.props.fetchAccountHolderData} 
                                                             bankingSession={this.props.bankingSession}/>}/>
                             <Route exact path='/admin/home' component={AdminHome} />
+                            <Route exact path='/account-holder/merit-checking' component={() => <MeritCheckingPage/>}/>
+                            <Route exact path='/account-holder/dba-checking' component={() => <DBACheckingAccountPage/>}/> 
+                            <Route exact path='/account-holder/cd-accounts' component={() => <CDAccountPage/>}/>   
                             <Route exact path='/admin/users' component={AdminUsersPage} />
                             <Route exact path='/admin/cdOfferings' component={AdminCDOfferingsPage} />
                             <Route exact path='/admin/accountHolders' component={AdminAccountHoldersPage} />

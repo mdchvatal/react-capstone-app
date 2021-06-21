@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Jumbotron, Card, CardBody, CardText, Container, CardTitle} from 'reactstrap';
+import { Jumbotron } from 'reactstrap';
 
 
 class MeritJumbotron extends Component {
@@ -17,12 +17,12 @@ class MeritJumbotron extends Component {
                                                             objectFit: 'none',
                                                             opacity: '0.9'}}>
                 <div className="container">
-                    <div className="form-inline justify-content-center">
+                    <div className="row justify-content-center">
                         <div className="col-4">
                         </div>
-                        <div class="row justify-content-center">
-                            <div class="col-1">
-                                <img alt="logo" src="assets/images/merit_logo.png" alt="Merit Bank Logo" height='75' borderRadius= '50%'/>
+                        <div className="row justify-content-center">
+                            <div className="col-1">
+                                <img alt="logo" src="assets/images/merit_logo.png" alt="Merit Bank Logo" height='75'/>
                             </div>
                         </div>
                         

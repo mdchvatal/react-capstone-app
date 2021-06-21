@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, Input, Label, Col, Row } from 'reactstrap';
 import { Control, Form, Errors } from 'react-redux-form';
 import { Link, NavLink, Redirect, withRouter} from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 
 const required = (val) => val && val.length;
@@ -21,18 +22,20 @@ class Login extends Component {
     
     handleSubmit(values) {
         console.log("Submit values: " + values);
+        if (this.props.bankingSession.token === null) {
+            this.props.loginUser(values.username, values.password);
+        }
         this.props.bankingSession.isStarting = true;
-        this.props.loginUser(values.username, values.password);
         this.props.resetLoginForm();
         this.setState({submit: true});
     }
 
     render() {
-        if (this.bankingSession != null && this.bankingSession.role === 'ADMIN') {
+         if (this.props.bankingSession != null && this.props.bankingSession.role === 'ADMIN') {
             return (
                 <Redirect to="/admin/home"/>
             )
-        } else if (this.bankingSession != null && this.bankingSession.role === 'USER') {
+        } else if (this.props.bankingSession != null && this.props.bankingSession.role == "USER") {
             return (
                 <Redirect to="/account-holder"/>
             )
@@ -41,7 +44,7 @@ class Login extends Component {
                 <React.Fragment>
                     <Form model="credentials" onSubmit={(values) => this.handleSubmit(values)}>
                         <Row className="form-group">
-                            <Label htmlFor="username" className="col-form-label">First Name</Label>
+                            <Label htmlFor="username" className="col-form-label">Username</Label>
                             <Col md={10}>
                                 <Control.text model=".username" id="username" name="username"
                                     placeholder="Username"
@@ -63,7 +66,7 @@ class Login extends Component {
                             </Col>
                         </Row>
                         <Row className="form-group">
-                            <Label htmlFor="password" className="col-form-label">Last Name</Label>
+                            <Label htmlFor="password" className="col-form-label">Password</Label>
                             <Col md={10}>
                                 <Control type="password" model=".password" id="password" name="password"
                                     placeholder="Password"

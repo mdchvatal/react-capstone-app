@@ -7,7 +7,7 @@ import Login from './LoginComponent';
 function RenderLoginButton({isAuthenticated, toggleModal, logoutUser}) {
     if (isAuthenticated) {
         return (
-            <Button outline onClick={() => {logoutUser()}}><span className="fa fa-sign-in fa-lg"></span>Sign Out</Button>
+            <Button outline onClick={logoutUser}><span className="fa fa-sign-in fa-lg"></span>Sign Out</Button>
         );
     } else {
         return (
@@ -115,8 +115,11 @@ class Header extends Component {
                     </React.Fragment>
                 );
             } else {
-                if (this.props.accountHolderData.accountHolder === null) {
+                if (this.props.accountHolderData.accountHolder == null) {
                     this.props.fetchAccountHolderData(this.props.bankingSession.token);
+                } 
+                if (this.props.cdOfferings.model[0] == null){
+                    this.props.fetchCDOfferings(this.props.bankingSession);
                 }
                 return(
                     <React.Fragment>
@@ -131,8 +134,8 @@ class Header extends Component {
                                         <UncontrolledDropdown nav inNavbar>
                                             <DropdownToggle nav caret>Checking</DropdownToggle>
                                             <DropdownMenu right>
-                                                <DropdownItem tag={Link} to="/checking/merit-checking">Merit Checking</DropdownItem>
-                                                <DropdownItem tag={Link} to="/checking/business-checking">Business Checking</DropdownItem>
+                                                <DropdownItem tag={Link} to="/account-holder/merit-checking">Merit Checking</DropdownItem>
+                                                <DropdownItem tag={Link} to="/account-holder/dba-checking">Business Checking</DropdownItem>
                                             </DropdownMenu>
                                         </UncontrolledDropdown>
                                         <UncontrolledDropdown nav inNavbar>
@@ -151,7 +154,7 @@ class Header extends Component {
                                             </DropdownMenu>
                                         </UncontrolledDropdown>
                                         <NavItem>
-                                            <NavLink className="nav-link" to="/cd-accounts">CD</NavLink>
+                                            <NavLink className="nav-link" to="/account-holder/cd-accounts">CD</NavLink>
                                         </NavItem>
                                     </Nav>
                                 </Collapse>

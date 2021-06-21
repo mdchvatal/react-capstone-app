@@ -6,6 +6,7 @@ import { Control, Form, Errors, actions } from 'react-redux-form';
 import { connect } from 'react-redux';
 
 import { Loading } from './LoadingComponent';
+import MeritJumbotron from './MeritJumbtronComponent';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -164,6 +165,8 @@ class AdminCDOfferings extends Component {
                 );
             } else {
                 return(
+                    <div>
+                    <MeritJumbotron/>
                     <div className="container">
                         <div className="row align-items-start">
                             <h1>CD Offerings</h1>
@@ -191,6 +194,7 @@ class AdminCDOfferings extends Component {
                                 </Stagger>
                             </div>
                         </div>
+                    </div>
                     </div>
                 );    
             }

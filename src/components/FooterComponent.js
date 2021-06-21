@@ -13,7 +13,6 @@ function Footer(props) {
                             <li><Link to="/home">Home</Link></li>
                             <li><Link to="/account-holder">Account Page</Link></li>
                             <li><Link to="/aboutus">About Us</Link></li>
-                            <li><Link to="/menu">Menu</Link></li>
                             <li><Link to="/contactus">Contact Us</Link></li>
                         </ul>
                     </div>
@@ -32,10 +31,9 @@ function Footer(props) {
                     <div className="col-12 col-sm-4 align-self-center">
                         <div className="text-center">
                             <h5>Connect With Us</h5>
-                            <a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i className="fa fa-linkedin"></i></a>
-                            <a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i className="fa fa-linkedin"></i></a>
-                            <a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i className="fa fa-linkedin"></i></a>
-                            
+                            <a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/rcarolinarodriguez/" target="_blank"><i className="fa fa-linkedin"></i></a>
+                            <a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/spencerlafarge/" target="_blank"><i className="fa fa-linkedin"></i></a>
+                            <a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/matthew-chvatal" target="_blank"><i className="fa fa-linkedin"></i></a>
                         </div>
                     </div>
                 </div>

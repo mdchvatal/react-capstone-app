@@ -8,7 +8,9 @@ import { AccountHolders } from './accountHolders';
 import { AccountHolderData } from './accountHolderDataReducer';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { InitialCredentials, DefaultCDOffering } from './forms';
+
+
+import { InitialCredentials, DefaultCDOffering, InitialTransfer } from './forms';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { CDOffering } from './cdOffering';
 
@@ -24,9 +26,12 @@ export const ConfigureStore = () => {
             accountHolders: AccountHolders, 
             accountHolderData: AccountHolderData,
             bankingSession: BankingSession,
+            transferStatus: TransferData,
+            postCDData: PostCDData,
             ...createForms({
                 credentials: InitialCredentials,
-                currentCDOffering: DefaultCDOffering
+                currentCDOffering: DefaultCDOffering,
+                transfer: InitialTransfer,
             })
         }),
         composeWithDevTools(applyMiddleware(thunk, logger))
