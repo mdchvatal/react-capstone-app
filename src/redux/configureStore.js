@@ -8,8 +8,8 @@ import { AccountHolders } from './accountHolders';
 import { AccountHolderData } from './accountHolderDataReducer';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-
-
+import { TransferData } from './transferReducer';
+import { PostCDData } from './postCDReducer';
 import { InitialCredentials, DefaultCDOffering, InitialTransfer } from './forms';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { CDOffering } from './cdOffering';
