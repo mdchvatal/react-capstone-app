@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { loginUser, logoutUser, fetchUsers, fetchCDOfferings, fetchAccountHolders, fetchAccountHolderData } from '../redux/ActionCreators';
+import { loginUser, logoutUser, 
+        fetchUsers, deleteUser, clearUser,
+        fetchCDOfferings, editCDOffering, clearCDOffering,
+        fetchAccountHolders, 
+        fetchAccountHolderData } from '../redux/ActionCreators';
 
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
@@ -13,7 +17,6 @@ import AdminCDOfferings from './AdminCDOfferingsComponent';
 import AccountHolderPage from './AccountHolderPageComponent';
 import AdminAccountHolders from './AdminAccountHoldersComponent';
 
-
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -21,7 +24,9 @@ const mapStateToProps = (state) => {
 	return {
 		bankingSession: state.bankingSession,
         users: state.users,
+        user: state.user,
         cdOfferings: state.cdOfferings,
+        cdOffering: state.cdOffering,
         accountHolders: state.accountHolders,
         accountHolderData: state.accountHolderData
 	}
@@ -32,7 +37,11 @@ const mapDispatchToProps = (dispatch) => ({
     logoutUser: () => dispatch(logoutUser()),
     resetLoginForm: () => { dispatch(actions.reset('credentials'))},
     fetchUsers: (bankingSession) => dispatch(fetchUsers(bankingSession)),
+    deleteUser: (bankingSession, userId) => dispatch(deleteUser(bankingSession, userId)),
+    clearUser: () => dispatch(clearUser()),
     fetchCDOfferings: (bankingSession) => dispatch(fetchCDOfferings(bankingSession)),
+    editCDOffering: (bankingSession, cdOffering) => dispatch(editCDOffering(bankingSession, cdOffering)),
+    clearCDOffering: () => dispatch(clearCDOffering()),
     fetchAccountHolders: (bankingSession) => dispatch(fetchAccountHolders(bankingSession)),
     fetchAccountHolderData: (jwt) => dispatch(fetchAccountHolderData(jwt))
 })
@@ -55,7 +64,10 @@ class Main extends Component {
                 <AdminUsers 
                     bankingSession={this.props.bankingSession}
                     fetchUsers={this.props.fetchUsers}
+                    deleteUser={this.props.deleteUser}
+                    clearUser={this.props.clearUser}
                     users={this.props.users.model}
+                    user={this.props.user}                    
                     status={this.props.users.status}
                     errorMessage={this.props.users.errorMessage}
                 />
@@ -66,7 +78,10 @@ class Main extends Component {
                 <AdminCDOfferings 
                     bankingSession={this.props.bankingSession}
                     fetchCDOfferings={this.props.fetchCDOfferings}
+                    editItem={this.props.editCDOffering}
+                    clearItem={this.props.clearCDOffering}
                     cdOfferings={this.props.cdOfferings.model}
+                    item={this.props.cdOffering}
                     status={this.props.cdOfferings.status}
                     errorMessage={this.props.cdOfferings.errorMessage}
                 />
@@ -105,7 +120,7 @@ class Main extends Component {
                                                             accountHolderData={this.props.accountHolderData} 
                                                             fetchAccountHolderData={this.props.fetchAccountHolderData} 
                                                             bankingSession={this.props.bankingSession}/>}/>
-                            <Route exact path='/admin' component={AdminHome} />
+                            <Route exact path='/admin/home' component={AdminHome} />
                             <Route exact path='/admin/users' component={AdminUsersPage} />
                             <Route exact path='/admin/cdOfferings' component={AdminCDOfferingsPage} />
                             <Route exact path='/admin/accountHolders' component={AdminAccountHoldersPage} />

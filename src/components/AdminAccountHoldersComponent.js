@@ -10,6 +10,8 @@ function RenderAccountHolder({accountHolder}) {
     return (
         <tr>
             <th scope="row">{accountHolder.id}</th>
+            <td><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
+            <td><i class="fa fa-trash-o" aria-hidden="true"></i></td>
             <td>{accountHolder.firstName}</td>
             <td>{accountHolder.middleName}</td>
             <td>{accountHolder.lastName}</td> 
@@ -58,6 +60,7 @@ class AdminAccountHolders extends Component {
                     <div className="container">
                         <div className="row align-items-start">
                             <h1>Account Holders</h1>
+                            <h5 className="list-actions"><i class="fa fa-plus" aria-hidden="true"></i>Add New</h5>
                             <div className="col-12 col-md m-1">
                                 <Stagger in>
                                     <Fade in>
@@ -65,6 +68,8 @@ class AdminAccountHolders extends Component {
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
+                                                    <th>Edit</th>
+                                                    <th>Delete</th>
                                                     <th>First Name</th>
                                                     <th>Middle Name</th>
                                                     <th>Last Name</th>
